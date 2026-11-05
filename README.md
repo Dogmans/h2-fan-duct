@@ -1,14 +1,14 @@
 # BIQU H2 right-end 5015 blower and opposed cooling ducts
 
-![CAD rendering of the one-piece lower duct mounted on the BIQU H2 extruder with the right-side 5015 blower and combined chain bracket](output/one_piece/assembled.png)
+![CAD rendering of the single-print blower-to-nozzle duct installed on the BIQU H2 extruder](output/monolithic/assembled.png)
 
-*Current assembly in situ: orange one-piece lower duct and two-bolt adapter, blue mounting bracket and right-side 5015 blower. The extruder and carriage references are shown translucent.*
+*Current assembly in situ: one continuous orange duct from the blower to both nozzle outlets, the blue mounting bracket and right-side 5015 blower. The extruder and carriage references are shown translucent.*
 
 The blower is mounted flat against the **right motor end**, with its intake facing right. A combined chain / fan bracket replaces the existing 3 mm chain plate and shares its two H2 M3 holes. The original 3510 heatsink cooling fan stays in place.
 
-The current model is `output/one_piece/H2_5015_OnePiece.FCStd`, built through the FreeCAD MCP bridge. The **lower duct prints as one closed piece**, bridging its internal roofs. Two cavity-up adapter halves capture the duct's side pockets and join with **two M3x10 bolts and two M3 hex nuts**. There are no M2 screws, tapped plastic holes or separate lid. The existing M3 mounting hardware is retained. See the [printing and assembly instructions](output/one_piece/PRINTING.md) for PETG settings, bridge checks and the recorded slicer alerts.
+The current model is `output/monolithic/H2_5015_Monolithic.FCStd`, built through the FreeCAD MCP bridge. The **entire blower-to-nozzle duct prints as one closed piece**, including the elbow and lower vent. It uses only the **two existing M3 mounting bolts**, washers and bracket nuts. There are no adapter joining bolts, small screws, lid, strap or clips. See the [printing and installation guide](output/monolithic/PRINTING.md) for PETG settings, bridge checks and recorded slicer alerts.
 
-The lower duct is now **11.2 mm tall instead of 15 mm**, with 1.6 mm floor and manifold roof thicknesses. Its far-end bend meets the straight manifold tangentially, removing the former 2 mm square shoulder. Lower-duct CAD volume is approximately 42% smaller while retaining the 14 x 8 mm main air passage and the nozzle locations. Use the matching revised adapter halves: their outlet and strap have been lowered to suit.
+The lower duct retains its **11.2 mm height**, 1.6 mm nominal walls, 14 x 8 mm main passage and smooth tangent bend. Nozzle locations and aim are unchanged. The closed elbow has a continuous sloped ceiling, a flat print base and a 45-degree underside beneath the narrow mounting foot. The old joint ears and split-oriented keel have been removed.
 
 ## Nominal envelope
 
@@ -20,7 +20,7 @@ Coordinates follow the supplied photo: X is left to right, Y points away from th
 | Fan + frame extension to right | 19 mm |
 | Extension to right including duct socket | 20.9 mm; allow about 22.2 mm including button-head screws and washers |
 | Added width on the photo's left | None relative to the existing heatsink fan |
-| Extra projection toward camera | 16 mm at the removable collar; fan alone projects 12.7 mm beyond the body |
+| Extra projection toward camera | 14.65 mm for the continuous duct; fan alone projects 12.7 mm beyond the body |
 | Projection away from camera | Frame reaches Y=22.3, about 4.8 mm beyond the body; within the inferred carriage zone |
 | Fan outlet height | Z=28 mm; the fan housing reaches approximately Z=79.7 mm |
 | Chain mount top | Existing Z=117.7 mm retained |
@@ -45,36 +45,37 @@ The socket opening is 15.6 mm along X and 20 mm along Y. Its top meets the fan o
 - Two M3 screws for the H2, nominally M3x8 as used with the original 3 mm chain plate. Reuse the existing screws if engagement is suitable.
 - Two M3x20 button-head screws for the fan, with about **1.5 mm of washers under each head**, and two M3 hex nuts. Use washers with enough outside diameter to span the blower's approximately 4.7 mm ear holes.
 - Two M3x10 button-head screws for the duct, about 0.5 mm washers, and two M3 hex nuts.
-- For the three printed duct parts: **two M3x10 socket-head bolts and two ordinary M3 hex nuts**. These join the adapter halves and capture the one-piece lower duct. No lid or strap screws are needed. See the [assembly guide](output/one_piece/PRINTING.md).
+- The complete duct is one print and requires **no joining hardware**. The two M3 mounting bolts above are its only fixings. See the [installation guide](output/monolithic/PRINTING.md).
 
 All four fan/duct nuts load from the **motor-facing side** of the right frame. Recesses are 2.5 mm deep with approximately 5.75 mm across flats. The fan recesses are elongated to preserve the slot adjustment. The fan recesses leave 1.5 mm of plastic between the nut and fan face. The duct recesses leave 3.5 mm between nut and duct mounting face.
 
 1. Fit the four nuts into the rear recesses. Check the real nut fit before mounting the bracket.
 2. Replace the existing chain plate with the combined bracket and refit the chain. The source SCAD's 15 mm H2 spacing, chain-hole positions and 69 mm distance between hole-group centers are retained. The comment saying 59 mm conflicts with the SCAD geometry; the geometry was followed. The original rounded union blend is omitted.
 3. Mount the blower on the right frame, intake pointing right, outlet pointing down. Use the specified washer stack so screw ends stop inside the frame instead of projecting into the motor. Check actual screw lengths and washer thicknesses during assembly.
-4. Assemble the three duct parts on the bench using the assembly guide, then fit the adapter's two-bolt mounting foot. The inlet meets the blower outlet. Fit the gasket around the seam and tighten the two M3 mounting bolts.
+4. Inspect the single duct print and fit its two-bolt mounting foot using the installation guide. The inlet meets the blower outlet. Fit the gasket around that butt joint and tighten the two M3 mounting bolts.
 5. With the printer cool and powered down, check the heater sock, nozzle, motor plug, wires, rods and full carriage travel. The tips should remain above the nozzle plane. Adjust the CAD if the real sock or nozzle differs from the reference.
 
 The old part-cooling fan and its mounting duct are replaced. Do not remove the stock heatsink cooling fan.
 
 ## Printing and verification
 
-This is a **CAD and toolpath-reviewed prototype**, not a physically tested airflow design. The lower duct has 1.6 mm nominal side walls and an integral roof. The transverse manifold is 14 x 8 mm; the side-arm roofs are 0.4 mm lower, giving 7.6 mm internal height there. This closes the arms two layers before the manifold at 0.2 mm layers, so the slicer can bridge across each channel. Nozzle ceilings bridge approximately 10 mm and retain their 0.2 mm internal treads. Both adapter cavities print upward. Airflow balance and cooling performance require testing on the printer.
+This is a **CAD and toolpath-reviewed prototype**, not a physically tested airflow design. The complete duct prints upright on its flat base. The lower manifold retains its two-layer roof stagger and approximately 14 mm bridges; the nozzle roofs retain approximately 10 mm bridges and 0.2 mm treads. The elbow ceiling and outer mounting-foot support are shaped for this upright orientation.
 
-The duct is intended for PETG. Use all three matching `output/one_piece/*_print.stl` files in their supplied orientations with supports disabled. They were sliced using Arachne, 0.2 mm layers and a 0.4 mm nozzle. The mesh audit finds no steep non-bridge overhangs. SuperSlicer's stability/loose-extrusion alerts remain recorded in the instructions and logs; the revised roof no longer produces its long-bridge alert. A 3 mm brim helps the rear adapter. Confirm bridge quality with your PETG profile before printing. The combined mounting bracket still needs supports.
+For PETG, use `output/monolithic/duct_print.stl` in its supplied orientation, with supports disabled, 0.2 mm layers and a 0.4 mm nozzle. Verification uses Arachne, four perimeters, 20% infill and a 3 mm brim. SuperSlicer retains floating/stability/loose-extrusion alerts, documented in the guide and logs. The CAD bridge and toolpath-anchor checks pass, but PETG sag, adhesion, fit and airflow still require physical testing. The separate mounting bracket still needs supports.
 
-`output/one_piece/validation.json` records three valid print solids, one connected air volume with exactly three openings, no blockage or overlapping mating parts, and no modeled collision with the body, nozzle, heater, stock fan, motor connector, bearing envelopes, rods or bracket. It also checks bolt/nut fit, the separated-half assembly path and positive retention of the lower duct. Export checks include watertight STL meshes, reopened STEP solids and a facet-based overhang audit. Rod and bearing positions were inferred from `croxy_carriage_h2_touch_less_offset.scad`, not measured from the photograph; the 8 mm rod diameter is assumed. The heater sock, plug, wiring and carriage are simplified references.
+`output/monolithic/validation.json` records one valid solid, one connected air route with exactly three openings, zero air blockage, no modeled reference collisions and fit for the existing mount hardware. The STL is watertight and the STEP reopens as one valid solid. The facet audit finds no non-flat downward area beyond the 45-degree criterion. Rod and bearing positions were inferred from `croxy_carriage_h2_touch_less_offset.scad`, with an assumed 8 mm rod diameter; the heater sock, plug, wiring and carriage remain simplified references.
 
 ## Files and regeneration
 
-- `output/one_piece/H2_5015_OnePiece.FCStd`: current three-part duct and mounting layout, with hidden print orientations and reference M3 joint hardware.
-- `output/one_piece/{lower_duct,adapter_front,adapter_back}_print.stl`: the three current duct print files, seated on Z=0.
-- `output/one_piece/*_assembled.step`: parts at installed coordinates; `duct_assembled.step` contains all three printed parts.
-- `output/right_face/h2_5015_right_bracket.stl`: the mounting bracket, including chain mount.
-- `build_one_piece_duct.py`: rebuild this revision via the FreeCAD MCP `execute_python_file` tool, using the saved right-face mount/layout.
-- `verify_one_piece.ps1`: repeat no-support slicing and record warnings. `-FailOnWarnings` provides strict warning handling. Generated G-code is geometry verification only.
-- `audit_one_piece_bridges.py`: inspect generated lower-duct bridge paths against the preceding CAD layer, through the same FreeCAD tool.
-- `output/support_free/` and `output/printable/`: earlier screw-assembled revisions, retained for reference; use the complete new set for this assembly.
+- `output/monolithic/H2_5015_Monolithic.FCStd`: current single-print duct and installed reference layout.
+- `output/monolithic/duct_print.stl`: the complete current duct, seated on Z=0 for upright printing.
+- `output/monolithic/duct_assembled.step`: the full duct at installed coordinates, without reference hardware.
+- `output/monolithic/PRINTING.md`: PETG printing and installation guide, including a cutaway illustration.
+- `output/right_face/h2_5015_right_bracket.stl`: the existing mounting bracket, including chain mount.
+- `build_monolithic_duct.py` and `render_monolithic_duct.py`: regenerate geometry and views via the FreeCAD MCP `execute_python_file` tool.
+- `verify_monolithic.ps1`: repeat support-disabled slicing; `-FailOnWarnings` treats retained alerts as failures. Verification G-code is not printer-ready.
+- `audit_monolithic_bridges.py` (FreeCAD) and `audit_monolithic_toolpaths.py` (ordinary Python): repeat CAD bridge and preceding-toolpath anchor checks.
+- `output/one_piece/`, `output/support_free/` and `output/printable/`: earlier multipart alternatives, retained for reference.
 - `build_h2_5015_right.py` and `right_face_parameters.json`: generate the reference mounting bracket and fan layout. Some H2 datums and routing stations are fixed in the scripts.
 
 H2 dimensions were read from BIQU's original manufacturer drawing [mirrored here](https://meltbro.de/images/product_images/original_images/Ha3e48c4557434aab986f21c8810ed609K.png), saved as `reference/H2-dimensions.png`, and checked against the user's carriage SCAD. The supplied chain SCAD was read as geometry reference and left unchanged.

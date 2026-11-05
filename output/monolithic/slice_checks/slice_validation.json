@@ -1,0 +1,11 @@
+[
+    {
+        "exit_code":  0,
+        "layer_height_mm":  0.2,
+        "supports":  false,
+        "part":  "duct",
+        "nozzle_mm":  0.4,
+        "warnings":  1,
+        "engine":  "arachne"
+    }
+]
