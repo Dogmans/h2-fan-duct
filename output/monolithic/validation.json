@@ -4,7 +4,7 @@
     "duct": {
       "valid": true,
       "solids": 1,
-      "volume_mm3": 17384.97836693487,
+      "volume_mm3": 17553.607010293366,
       "bounds": [
         -14.899999999999999,
         82.8,
@@ -20,6 +20,90 @@
   "duct_mount_hardware": "existing M3x10 button-head bolts, 0.5 mm washers, bracket captive nuts",
   "plastic_tapped_holes": 0,
   "nominal_wall_mm": 1.6,
+  "vertical_corner_radii": [
+    {
+      "corner": "left inner vent turn",
+      "xy_mm": [
+        -1.7,
+        -14.9
+      ],
+      "radius_mm": 4.0,
+      "removed_material_to_air_clearance_mm": null
+    },
+    {
+      "corner": "right inner vent turn",
+      "xy_mm": [
+        29.7,
+        -14.9
+      ],
+      "radius_mm": 4.0,
+      "removed_material_to_air_clearance_mm": null
+    },
+    {
+      "corner": "vent-to-elbow branch",
+      "xy_mm": [
+        42.9,
+        -14.9
+      ],
+      "radius_mm": 4.0,
+      "removed_material_to_air_clearance_mm": null
+    },
+    {
+      "corner": "mount foot root left",
+      "xy_mm": [
+        67.9,
+        -14.9
+      ],
+      "radius_mm": 3.0,
+      "removed_material_to_air_clearance_mm": null
+    },
+    {
+      "corner": "mount foot root right",
+      "xy_mm": [
+        71.9,
+        -14.9
+      ],
+      "radius_mm": 3.0,
+      "removed_material_to_air_clearance_mm": null
+    },
+    {
+      "corner": "left nozzle shoulder",
+      "xy_mm": [
+        -1.7,
+        -5.3
+      ],
+      "radius_mm": 0.8,
+      "removed_material_to_air_clearance_mm": null
+    },
+    {
+      "corner": "right nozzle shoulder",
+      "xy_mm": [
+        29.7,
+        -5.3
+      ],
+      "radius_mm": 0.8,
+      "removed_material_to_air_clearance_mm": null
+    },
+    {
+      "corner": "elbow outer front",
+      "xy_mm": [
+        82.8,
+        -32.15
+      ],
+      "radius_mm": 1.5,
+      "removed_material_to_air_clearance_mm": 1.603121954188119
+    },
+    {
+      "corner": "elbow outer rear",
+      "xy_mm": [
+        82.8,
+        -14.9
+      ],
+      "radius_mm": 1.5,
+      "removed_material_to_air_clearance_mm": 3.127319056770504
+    }
+  ],
+  "flat_print_base_preserved": true,
   "lower_duct_height_mm": 11.2,
   "manifold_channel_mm": [
     14,

@@ -6,7 +6,8 @@
     "step_solids": 1,
     "steep_nonbridge_area_mm2": 0,
     "flat_bridge_area_mm2": 1543.724929412827,
-    "flat_bed_area_mm2": 2338.867569942422,
+    "stl_roundoff_on_exact_45_degree_planes_mm2": 0.0013015359872952104,
+    "flat_bed_area_mm2": 2352.3402732443296,
     "print_bounds_mm": [
       97.7,
       45.15,

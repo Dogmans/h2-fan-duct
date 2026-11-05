@@ -10,6 +10,8 @@ The current model is `output/monolithic/H2_5015_Monolithic.FCStd`, built through
 
 The lower duct retains its **11.2 mm height**, 1.6 mm nominal walls, 14 x 8 mm main passage and smooth tangent bend. Nozzle locations and aim are unchanged. The closed elbow has a continuous sloped ceiling, a flat print base and a 45-degree underside beneath the narrow mounting foot. The old joint ears and split-oriented keel have been removed.
 
+Nine perimeter corners are rounded with **0.8 to 4 mm radii**, including the inner vent turns and the vent-to-elbow/mounting-foot transitions. The [underside view](output/monolithic/bottom.png) shows the smoother outline; the bed face stays flat and the air passage is unchanged.
+
 ## Nominal envelope
 
 Coordinates follow the supplied photo: X is left to right, Y points away from the camera, Z is up. The standard nozzle tip is `(14, 1.3, 0)` mm. The H2 body is X=0..61.9, Y=-17.5..17.5, Z=22.2..57.2. The existing heatsink fan extends left to X=-14.9.
@@ -61,7 +63,7 @@ The old part-cooling fan and its mounting duct are replaced. Do not remove the s
 
 This is a **CAD and toolpath-reviewed prototype**, not a physically tested airflow design. The complete duct prints upright on its flat base. The lower manifold retains its two-layer roof stagger and approximately 14 mm bridges; the nozzle roofs retain approximately 10 mm bridges and 0.2 mm treads. The elbow ceiling and outer mounting-foot support are shaped for this upright orientation.
 
-For PETG, use `output/monolithic/duct_print.stl` in its supplied orientation, with supports disabled, 0.2 mm layers and a 0.4 mm nozzle. Verification uses Arachne, four perimeters, 20% infill and a 3 mm brim. SuperSlicer retains floating/stability/loose-extrusion alerts, documented in the guide and logs. The CAD bridge and toolpath-anchor checks pass, but PETG sag, adhesion, fit and airflow still require physical testing. The separate mounting bracket still needs supports.
+For PETG, use `output/monolithic/duct_print.stl` in its supplied orientation, with supports disabled, 0.2 mm layers and a 0.4 mm nozzle. Verification uses Arachne, four perimeters, 20% infill and a 3 mm brim. SuperSlicer retains stability/loose-extrusion alerts, documented in the guide and logs; the rounded revision no longer produces the previous floating-region alert. The CAD bridge and toolpath-anchor checks pass, but PETG sag, adhesion, fit and airflow still require physical testing. The separate mounting bracket still needs supports.
 
 `output/monolithic/validation.json` records one valid solid, one connected air route with exactly three openings, zero air blockage, no modeled reference collisions and fit for the existing mount hardware. The STL is watertight and the STEP reopens as one valid solid. The facet audit finds no non-flat downward area beyond the 45-degree criterion. Rod and bearing positions were inferred from `croxy_carriage_h2_touch_less_offset.scad`, with an assumed 8 mm rod diameter; the heater sock, plug, wiring and carriage remain simplified references.
 

@@ -189,6 +189,42 @@ for y in [-3,8]:
     duct=duct.cut(teardrop_x_up(y,18.5,3.6,FX+6,14))
 duct=duct.removeSplitter()
 
+# Round the perimeter in plan, along vertical edges. This leaves the bed face
+# flat; a fillet around the bottom horizontal edge would introduce an overhang.
+# Select by position rather than transient OCC edge numbers.
+corner_radii=[
+    ('left inner vent turn',-1.7,-14.9,4.0),
+    ('right inner vent turn',29.7,-14.9,4.0),
+    ('vent-to-elbow branch',42.9,-14.9,4.0),
+    ('mount foot root left',67.9,-14.9,3.0),
+    ('mount foot root right',71.9,-14.9,3.0),
+    ('left nozzle shoulder',-1.7,-5.3,0.8),
+    ('right nozzle shoulder',29.7,-5.3,0.8),
+    ('elbow outer front',82.8,-32.15,1.5),
+    ('elbow outer rear',82.8,-14.9,1.5),
+]
+rounding=[]
+unrounded=duct.copy()
+for label,x,y,radius in corner_radii:
+    selected=[]
+    for edge in duct.Edges:
+        bounds=edge.BoundBox
+        if (bounds.XLength<1e-5 and bounds.YLength<1e-5
+            and abs(bounds.XMin-x)<1e-4 and abs(bounds.YMin-y)<1e-4
+            and abs(bounds.ZMin-BASE)<1e-4 and bounds.ZLength>0.5):
+            selected.append(edge)
+    assert len(selected)==1,'Missing or ambiguous corner: '+label
+    rounded=duct.makeFillet(radius,selected)
+    assert rounded.isValid() and len(rounded.Solids)==1,'Invalid radius: '+label
+    removed=duct.cut(rounded)
+    gap=removed.distToShape(allair)[0] if removed.Volume>1e-5 else None
+    assert gap is None or gap>=1.59,'Radius would thin an air-passage wall: '+label
+    rounding.append({'corner':label,'xy_mm':[x,y],'radius_mm':radius,
+                     'removed_material_to_air_clearance_mm':gap})
+    duct=rounded
+duct=duct.removeSplitter()
+fullouter=fullouter.cut(unrounded.cut(duct)).fuse(duct.cut(unrounded)).removeSplitter()
+
 obj('Duct','PRINT - continuous blower inlet, elbow and opposed jets',duct,group=parts)
 obj('LowerAir','Main channel and nozzle air volume',air,(0.25,0.7,0.95),build,False)
 obj('AdapterAir','Continuous closed elbow air volume',adapter_air,(0.25,0.7,0.95),build,False)
@@ -201,6 +237,7 @@ report={
         'bounds':[bb.XMin,bb.XMax,bb.YMin,bb.YMax,bb.ZMin,bb.ZMax]}},
     'joining_fasteners':0,'duct_mount_bolts':2,'duct_mount_hardware':'existing M3x10 button-head bolts, 0.5 mm washers, bracket captive nuts',
     'plastic_tapped_holes':0,'nominal_wall_mm':WALL,
+    'vertical_corner_radii':rounding,'flat_print_base_preserved':True,
     'lower_duct_height_mm':TOP-BASE,'manifold_channel_mm':[14,ROOF-FLOOR],
     'side_arm_roof_step_mm':0.4,'side_arm_channel_height_mm':SIDE_ROOF-FLOOR,
     'inlet_center_z_mm':(FLOOR+ROOF)/2,'blower_outlet_plane_z_mm':28,
@@ -250,15 +287,28 @@ saved=Mesh.Mesh(stl_path); vv,ff=saved.Topology; edges={}
 for f in ff:
     for a,b in [(f[0],f[1]),(f[1],f[2]),(f[2],f[0])]:
         edge=(min(a,b),max(a,b)); edges[edge]=edges.get(edge,0)+1
-steep=[]; flat=[]
+steep=[]; flat=[]; numeric_45_degree_area=[]
 for f in saved.Facets:
     if f.Normal.z<-.7072 and max(p[2] for p in f.Points)>.01:
+        # Float32 STL vertices can tilt tiny, skinny triangles on an exact
+        # 45-degree plane. Confirm against that BREP plane before correcting
+        # only this numerical classification; genuine overhangs still fail.
+        if f.Area<0.01 and abs(f.Normal.z+math.sqrt(0.5))<0.001:
+            center=sum((V(*p) for p in f.Points),V())/3
+            distance,points,info=pr.distToShape(Part.Vertex(center))
+            if distance<1e-5 and info[0][0]=='Face':
+                face=pr.Faces[info[0][1]]  # distToShape uses zero-based indices.
+                normal=face.normalAt(*info[0][2])
+                if type(face.Surface).__name__=='Plane' and abs(normal.z+math.sqrt(0.5))<1e-10:
+                    numeric_45_degree_area.append(f.Area)
+                    continue
         (flat if f.Normal.z<-.9999 else steep).append(f.Area)
 imported=Part.read(step_path)
 bed_area=sum(f.Area for f in pr.Faces if abs(f.CenterOfMass.z)<1e-6 and f.normalAt(0,0).z<-0.99)
 checks={'duct':{'stl_solid':saved.isSolid(),'nonmanifold_edges':sum(v!=2 for v in edges.values()),
     'step_valid':imported.isValid(),'step_solids':len(imported.Solids),
     'steep_nonbridge_area_mm2':sum(steep),'flat_bridge_area_mm2':sum(flat),
+    'stl_roundoff_on_exact_45_degree_planes_mm2':sum(numeric_45_degree_area),
     'flat_bed_area_mm2':bed_area,'print_bounds_mm':[pr.BoundBox.XLength,pr.BoundBox.YLength,pr.BoundBox.ZLength]}}
 json.dump(checks,open(os.path.join(OUT,'export_checks.json'),'w'),indent=2)
 print('Export checks',checks)

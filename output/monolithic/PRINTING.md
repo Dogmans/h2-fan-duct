@@ -8,6 +8,10 @@ Print **`duct_print.stl` only** for the complete orange duct. It includes the bl
 
 ![The single part in its supplied upright bed orientation](print_orientation.png)
 
+![Underside outline with rounded vent and elbow junctions](bottom.png)
+
+Nine vertical perimeter corners have been radiused in plan: **4 mm** at the three inner vent/branch turns, **3 mm** at the two mounting-foot roots, **0.8 mm** at the two nozzle shoulders and **1.5 mm** at the two outer elbow corners. The bottom horizontal edges are not rolled upward, so the broad print base remains flat. The nozzle mouths, inlet dimensions and mounting seats retain their functional shape. Where radii remove material, the CAD check verifies approximately 1.6 mm or more separation from the air passage.
+
 Use the supplied flat-bottom orientation, a calibrated PETG profile, **0.2 mm fixed layers**, a 0.4 mm nozzle, four perimeters and 20% infill. Verification uses a 3 mm brim and supports disabled. The mesh is approximately **97.7 x 45.15 x 27 mm**. Generate printer-ready G-code with your own temperatures, cooling and bridge settings.
 
 The lower duct keeps its 11.2 mm height, 14 x 8 mm main passage, 7.6 mm side-arm height and smooth tangent bend. Its side-arm roofs close two layers before the transverse manifold, allowing short bridge directions across each channel. The manifold bridges about 14 mm; nozzle ceilings bridge about 10 mm and retain their 0.2 mm treads.
@@ -33,11 +37,11 @@ Use this complete single print in place of the previous three duct parts. The ex
 
 `validation.json` records one valid solid, one connected air volume and exactly three openings, zero air blockage, zero modeled reference collisions and clearance for the existing mounting bolts and washers. `export_checks.json` records a watertight STL with zero nonmanifold edges and a STEP file that reopens as one valid solid.
 
-Support-disabled slicing with SuperSlicer 2.7.62.0, Arachne, 0.2 mm layers and a 0.4 mm nozzle succeeds, but retains **Floating object part / Collapsing overhang / Loose extrusions** alerts in `slice_checks/duct.log`. These alerts are not suppressed. This remains a CAD and slicer-reviewed prototype requiring a physical PETG print and airflow test.
+Support-disabled slicing with SuperSlicer 2.7.62.0, Arachne, 0.2 mm layers and a 0.4 mm nozzle succeeds, but retains **Collapsing overhang / Loose extrusions** alerts in `slice_checks/duct.log`. The previous **Floating object part** alert disappears with the rounded revision. Remaining alerts are not suppressed. This remains a CAD and slicer-reviewed prototype requiring a physical PETG print and airflow test.
 
 `slice_checks/duct_bridge_audit.json` samples the preceding CAD layer at 0.15 mm intervals on sections approximated to 0.02 mm. All 281 manifold-roof bridge paths have supported ends, independently checked against the exact solid. Their longest unsupported run is approximately 14.0 mm. The audit also samples the elbow's perimeter paths and records source hashes.
 
-`slice_checks/toolpath_anchor_audit.json` checks all 4,501 continuous extrusion runs above the first layer. Each has a sampled point within 0.48 mm of a preceding-layer extrusion centerline. This finds a nearby anchor; it does **not** prove that every portion of a run is supported, or predict PETG sag, adhesion or cooling.
+`slice_checks/toolpath_anchor_audit.json` checks all 4,759 continuous extrusion runs above the first layer. Each has a sampled point within 0.48 mm of a preceding-layer extrusion centerline. This finds a nearby anchor; it does **not** prove that every portion of a run is supported, or predict PETG sag, adhesion or cooling.
 
 Regenerate through `build_monolithic_duct.py` in FreeCAD, slice with `verify_monolithic.ps1`, run `audit_monolithic_bridges.py` through FreeCAD and `audit_monolithic_toolpaths.py` with ordinary Python. `verify_monolithic.ps1 -FailOnWarnings` treats the retained slicer alerts as failures. The ignored verification G-code has no heating or homing sequence and is not printer-ready.
 

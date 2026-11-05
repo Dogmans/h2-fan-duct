@@ -40,9 +40,12 @@ try:
     d.Print_duct.ViewObject.ShapeColor=(0.95,0.46,0.12)
     frame(); v.saveImage(os.path.join(OUT,'print_orientation.png'),1600,1000,'White')
 
+    v.viewBottom(); Gui.updateGui(); v.fitAll(); Gui.updateGui()
+    v.saveImage(os.path.join(OUT,'bottom.png'),1600,1000,'White')
+
     d.PrintLayout.Visibility=False; section.Visibility=True
     frame(); v.saveImage(os.path.join(OUT,'cutaway.png'),1600,1000,'White')
 finally:
     for o in objects: o.Visibility=visibility[o.Name]
     d.recompute(); frame(); d.save(); v.setAnimationEnabled(animation_enabled)
-print('Saved installed, upright print orientation and illustrative cutaway views')
+print('Saved installed, upright print, rounded underside and illustrative cutaway views')
