@@ -1,0 +1,38 @@
+[
+    {
+        "exit_code":  0,
+        "layer_height_mm":  0.2,
+        "supports":  false,
+        "part":  "tray",
+        "nozzle_mm":  0.4,
+        "warnings":  1,
+        "engine":  "arachne"
+    },
+    {
+        "exit_code":  0,
+        "layer_height_mm":  0.2,
+        "supports":  false,
+        "part":  "cover",
+        "nozzle_mm":  0.4,
+        "warnings":  0,
+        "engine":  "arachne"
+    },
+    {
+        "exit_code":  0,
+        "layer_height_mm":  0.2,
+        "supports":  false,
+        "part":  "adapter_front",
+        "nozzle_mm":  0.4,
+        "warnings":  1,
+        "engine":  "arachne"
+    },
+    {
+        "exit_code":  0,
+        "layer_height_mm":  0.2,
+        "supports":  false,
+        "part":  "adapter_back",
+        "nozzle_mm":  0.4,
+        "warnings":  1,
+        "engine":  "arachne"
+    }
+]

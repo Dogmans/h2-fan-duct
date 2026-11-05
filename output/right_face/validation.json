@@ -1,0 +1,123 @@
+{
+  "layout": "RIGHT motor end; intake points right (+X)",
+  "parameters": {
+    "fan_center_y": -3.0,
+    "fan_outlet_z": 28.0,
+    "fan_thickness": 15.0,
+    "right_frame_thickness": 4,
+    "socket_x": 15.6,
+    "socket_y": 20.0,
+    "main_wall": 1.6,
+    "branch_wall": 1.2,
+    "outlet_width": 10.0,
+    "outlet_height": 3.4,
+    "outlet_z": 3.8,
+    "nozzle_side_distance": 9.5
+  },
+  "parts": {
+    "bracket": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 9724.407846238868,
+      "bounds": [
+        28.90000000000005,
+        67.90000000000006,
+        -31.19436009231746,
+        22.270843275022372,
+        13.500000000000046,
+        117.70000000000022
+      ]
+    },
+    "duct": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 9016.369721837526,
+      "bounds": [
+        -13.2,
+        82.80000000000001,
+        -32.15,
+        13.0,
+        1.0748701226308417,
+        28.0
+      ]
+    },
+    "air": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 14980.532276600747,
+      "bounds": [
+        -12.0,
+        81.2,
+        -30.55,
+        6.3,
+        1.9973100811210442,
+        34.9
+      ]
+    }
+  },
+  "collisions_mm3": {
+    "body": {
+      "bracket": 0.0,
+      "duct": 0.0,
+      "blower": 0.0
+    },
+    "heater": {
+      "bracket": 0.0,
+      "duct": 0.0,
+      "blower": 0.0
+    },
+    "nozzle": {
+      "bracket": 0.0,
+      "duct": 0.0,
+      "blower": 0.0
+    },
+    "stock_3510": {
+      "bracket": 0.0,
+      "duct": 0.0,
+      "blower": 0.0
+    },
+    "connector": {
+      "bracket": 0.0,
+      "duct": 0.0,
+      "blower": 0.0
+    },
+    "blower": {
+      "bracket": 0.0,
+      "duct": 0.0,
+      "blower": 0
+    },
+    "carriage": {
+      "bracket": 0.0,
+      "duct": 0.0,
+      "blower": 0.0
+    },
+    "rods": {
+      "bracket": 0.0,
+      "duct": 0.0,
+      "blower": 0.0
+    }
+  },
+  "heater_clearance_mm": 2.0411786733120465,
+  "air_blockage_mm3": 0.0,
+  "air_openings": [
+    2152.799999999999,
+    20.40000000000002,
+    20.4
+  ],
+  "mount_air_clearance_mm": [
+    6.3976007193662845,
+    16.123009453190406
+  ],
+  "fan_to_motor_mm": 4,
+  "added_right_mm_fan": 19.0,
+  "added_right_mm_including_socket": 20.900000000000013,
+  "added_near_mm": 14.649999999999999,
+  "lowest_duct_mm": 1.0748701226308417,
+  "jet_area_mm2_each": 34.0,
+  "jet_target_z_mm": 0.34251356816005085,
+  "rod_clearance_mm": {
+    "fan": 3.9524267197385394,
+    "bracket": 15.311881774698872
+  },
+  "bracket_duct_interference_mm3": 0.0
+}

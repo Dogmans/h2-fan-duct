@@ -1,0 +1,5 @@
+# Preserve binary reference documents and CAD exports on every platform.
+*.pdf binary
+*.FCStd binary
+*.stl binary
+*.zip binary

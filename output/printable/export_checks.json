@@ -1,0 +1,50 @@
+{
+  "tray": {
+    "stl_solid": true,
+    "nonmanifold_edges": 0,
+    "step_valid": true,
+    "step_solids": 1,
+    "flat_bed_area_mm2": 2006.5932923611674,
+    "print_bounds_mm": [
+      78.9,
+      40.89915084837338,
+      11.0
+    ]
+  },
+  "cover": {
+    "stl_solid": true,
+    "nonmanifold_edges": 0,
+    "step_valid": true,
+    "step_solids": 1,
+    "flat_bed_area_mm2": 1880.4374805022098,
+    "print_bounds_mm": [
+      78.9,
+      40.89915084837338,
+      10.693558111343872
+    ]
+  },
+  "adapter_front": {
+    "stl_solid": true,
+    "nonmanifold_edges": 0,
+    "step_valid": true,
+    "step_solids": 1,
+    "flat_bed_area_mm2": 104.24960680343129,
+    "print_bounds_mm": [
+      22.299987430937,
+      27.0,
+      10.00000000000001
+    ]
+  },
+  "adapter_back": {
+    "stl_solid": true,
+    "nonmanifold_edges": 0,
+    "step_valid": true,
+    "step_solids": 1,
+    "flat_bed_area_mm2": 104.2496068034313,
+    "print_bounds_mm": [
+      22.299987430937,
+      27.00000000000001,
+      36.500000000000014
+    ]
+  }
+}

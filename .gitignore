@@ -1,0 +1,14 @@
+# Local Python dependencies and caches
+/tools/python/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# FreeCAD backup files
+*.FCBak
+*.FCStd1
+
+# Regenerated slicer toolpaths and local settings
+*.gcode
+**/slice_checks/settings_*/
