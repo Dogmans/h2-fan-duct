@@ -2,6 +2,10 @@
 
 Print all three matching `*_print.stl` files in this folder. The lower U-shaped duct includes its roof and both nozzle roofs in one solid. The adapter stays in two halves for cavity access and support-free orientation. Two M3 bolts close those halves around retaining keys on the lower duct. No small screws, tapped plastic holes or flexible clips are required.
 
+The slim revision reduces lower-duct height from **15 to 11.2 mm**, using 1.6 mm floor and manifold roof thicknesses. The main passage remains 14 x 8 mm, with its center lowered from Z=8 to Z=6.6 mm. Nozzle locations and aim are retained. The far-end bend is now tangent to the straight manifold, eliminating its 2 mm square shoulder. Lower-duct CAD volume falls from 16.43 to 9.51 cm3, approximately 42%; actual filament use depends on slicing.
+
+Use the **complete slim set**. Its adapter outlet, supporting keel and roof strap match the lowered duct. Earlier one-piece adapter prints have a different outlet height and are not matching parts.
+
 ![Installed one-piece duct and two-bolt adapter](assembled.png)
 
 ![Three printed parts in their supplied bed orientations](print_layout.png)
@@ -48,7 +52,7 @@ The two new bolts are the only fasteners joining the three printed duct parts. T
 
 All three parts were sliced with supports disabled using SuperSlicer 2.7.62.0, Arachne, 0.2 mm layers and a 0.4 mm nozzle. Each retains a stability alert containing **Collapsing overhang / Loose extrusions**. The lower duct's initial **Long bridging extrusions** alert disappeared after the roof step was added. The alerts remain in `slice_checks/*.log` and `slice_validation.json`; inspect your own slicer preview before printing.
 
-`slice_checks/lower_duct_bridge_audit.json` records 281 manifold-roof bridge extrusion segments at print heights 10.8 and 11.2 mm. Every segment has both ends on the preceding CAD layer. At 0.15 mm sample spacing, the longest unsupported run is approximately **14.0 mm**; the longest complete extrusion including its supported ends is 15.64 mm. CAD support sampling does not predict PETG sag or actual infill adhesion.
+`slice_checks/lower_duct_bridge_audit.json` records 282 manifold-roof bridge extrusion segments at print heights 9.4 and 9.8 mm. Every segment has both ends on the preceding CAD layer. At 0.15 mm sample spacing on CAD sections discretized to 0.02 mm, the longest unsupported run is approximately **14.0 mm**; the longest complete extrusion including its supported ends is 15.64 mm. The audit records source hashes for the STL and verification G-code. CAD support sampling does not predict PETG sag or actual infill adhesion.
 
 Run `verify_one_piece.ps1` from the repository root to repeat slicing; `-FailOnWarnings` treats the retained alerts as failures. Run `audit_one_piece_bridges.py` through FreeCAD afterward to measure bridge paths against the prior CAD layer. The ignored `*verification.gcode` files have no heating or homing sequence and are geometry checks only. Generate printer-ready G-code with your own PETG profile.
 

@@ -8,6 +8,8 @@ The blower is mounted flat against the **right motor end**, with its intake faci
 
 The current model is `output/one_piece/H2_5015_OnePiece.FCStd`, built through the FreeCAD MCP bridge. The **lower duct prints as one closed piece**, bridging its internal roofs. Two cavity-up adapter halves capture the duct's side pockets and join with **two M3x10 bolts and two M3 hex nuts**. There are no M2 screws, tapped plastic holes or separate lid. The existing M3 mounting hardware is retained. See the [printing and assembly instructions](output/one_piece/PRINTING.md) for PETG settings, bridge checks and the recorded slicer alerts.
 
+The lower duct is now **11.2 mm tall instead of 15 mm**, with 1.6 mm floor and manifold roof thicknesses. Its far-end bend meets the straight manifold tangentially, removing the former 2 mm square shoulder. Lower-duct CAD volume is approximately 42% smaller while retaining the 14 x 8 mm main air passage and the nozzle locations. Use the matching revised adapter halves: their outlet and strap have been lowered to suit.
+
 ## Nominal envelope
 
 Coordinates follow the supplied photo: X is left to right, Y points away from the camera, Z is up. The standard nozzle tip is `(14, 1.3, 0)` mm. The H2 body is X=0..61.9, Y=-17.5..17.5, Z=22.2..57.2. The existing heatsink fan extends left to X=-14.9.
@@ -25,6 +27,7 @@ Coordinates follow the supplied photo: X is left to right, Y points away from th
 | Duct outlets | About 32.9 mm2 per channel, centered near Z=3.70 mm, X=1.5 and 26.5, Y=1.3; vertical mouths |
 | Jet direction | Nozzle floors and stepped roof envelope follow 15 degrees inward/down; nominal aim is near Z=0.35 at the nozzle |
 | Lowest duct surface | 1 mm above nozzle tip |
+| Lower duct height | 11.2 mm; main inlet center at Z=6.6 mm |
 | Heater / sock gap | At least 2.09 mm to the modeled 24 x 20 x 12 mm envelope |
 
 A 5015 housing is larger than the 35 mm motor end. Some overhang in Y is unavoidable with this orientation. This layout avoids placing the fan's 15 mm depth on the near face and keeps the larger addition on the right as requested. Check the complete printer's travel envelope before homing.

@@ -18,7 +18,10 @@ parts=doc.addObject('App::DocumentObjectGroup','PrintedDuct'); parts.Label='PRIN
 layouts=doc.addObject('App::DocumentObjectGroup','PrintLayout'); layouts.Label='Print orientations - hidden, STLs use these placements'
 layouts.Visibility=False
 
-WALL=1.6; BASE=1.0; FLOOR=4.0; ROOF=12.0; TOP=16.0
+WALL=1.6; BASE=1.0
+# A monolithic duct needs only the same 1.6 mm floor/roof as its side walls.
+# Keep the 8 mm air height; lower the inlet datum to remove the former thick lid.
+FLOOR=BASE+WALL; ROOF=FLOOR+8.0; TOP=ROOF+WALL
 YC=1.3; TIP_X=1.5; TIP_Z=3.65; ANGLE=math.radians(15); TIP_W=10.; TIP_H=3.2
 SPLIT_Y=-23.5
 P=json.load(open(os.path.join(ROOT,'right_face_parameters.json')))
@@ -51,8 +54,10 @@ def plan(extra):
     hm=7+extra; hb=5+extra; radius=5+hb; inner=max(0,5-hb)
     return union([
         box(67.3,2*hm,1,-3.3,-23.5-hm,0),
-        quarter(-3.3,-18.5,radius,inner,-1,-1),
-        box(2*hb,14.8,1,-8.3-hb,-18.5,0),
+        # Tangent to the transverse rear edge: -20.5-(10+extra)=-30.5-extra.
+        # The former -18.5 center left a redundant 2 mm square shoulder here.
+        quarter(-3.3,-20.5,radius,inner,-1,-1),
+        box(2*hb,16.8,1,-8.3-hb,-20.5,0),
         quarter(-3.3,-3.7,radius,inner,-1,1),
         box(2*hb,19.8,1,36.3-hb,-23.5,0),
         quarter(31.3,-3.7,radius,inner,1,1)])
@@ -60,7 +65,7 @@ def extrude_plan(s,z,height):
     face=max([f for f in s.Faces if f.normalAt(0,0).z>0.99],key=lambda f:f.Area)
     result=face.extrude(V(0,0,height)); result.translate(V(0,0,z-1)); return result
 
-# Planar U manifold: one flat floor, vertical sides, no roof until the cover is fitted.
+# Planar U manifold with a flat bed face and thin integral roof.
 airplan=plan(0); outerplan=plan(WALL)
 mainair=extrude_plan(airplan,FLOOR,ROOF-FLOOR)
 # Close the side arms two layers before the transverse manifold. This gives
@@ -138,7 +143,7 @@ def rect(center,t,width,height):
     ps=[c+u*a*width/2+v*b*height/2 for a,b in [(-1,-1),(1,-1),(1,1),(-1,1)]]
     return Part.makePolygon(ps+[ps[0]])
 stations=[((SX,SY,27.5),(0,0,-1),20,15.6),((SX,SY,22),(0,0,-1),16,13),
-          ((SX-2,-22.5,15),(-0.707,0,-0.707),14,8),((64,-23.5,8),(-1,0,0),14,8)]
+          ((SX-2,-22.5,15),(-0.707,0,-0.707),14,8),((64,-23.5,(FLOOR+ROOF)/2),(-1,0,0),14,8)]
 def adapter_loft(w): return Part.makeLoft([rect(c,t,a+2*w,b+2*w) for c,t,a,b in stations],True,True)
 # Constant-depth XZ profiles make the internal closures flat bridges rather than
 # shallow, unsupported loft ceilings. Inlet and outlet mating dimensions stay fixed.
@@ -157,10 +162,11 @@ def yz_solid(points,x,depth):
 adapter_outer=adapter_outer.fuse(yz_solid([(-14.9,19.05),(-14.9,25),(-8.95,25)],SX-9.4,18.8))
 # Roof strap and positive end stop replace the collar's unsupported closing lips.
 # The two bolted halves capture side keys; the roof strap needs no screw.
-collar=union([box(4,20,1.6,61,-33.5,16.2),box(1,20,15.4,64,-33.5,2.4)])
+STRAP_BOTTOM=TOP+0.2
+collar=union([box(4,20,1.6,61,-33.5,STRAP_BOTTOM),box(1,20,STRAP_BOTTOM+1.6-BASE,64,-33.5,BASE)])
 cc=[V(61,-13.5,0),V(64.8,-13.5,0),V(61,-17.3,0)]
 collar=collar.cut(Part.Face(Part.makePolygon(cc+[cc[0]])).extrude(V(0,0,30)))
-collar=collar.cut(yz_solid([(-14.9,2.4),(-13.5,2.4),(-13.5,3.8)],63.9,1.2))
+collar=collar.cut(yz_solid([(-14.9,BASE),(-13.5,BASE),(-13.5,BASE+1.4)],63.9,1.2))
 adapter_outer=adapter_outer.fuse(collar)
 # Existing two M3 fixing positions, still on the right motor-end frame.
 def capsule_yz(a,b,r,x,depth):
@@ -179,13 +185,13 @@ def keel_wire(y,xmin,xmax,zmin,zmax):
 growth=(13-(-8))/(13-(-14.9))
 keel=Part.makeLoft([
     keel_wire(13,FX+2,80.9,14.5,22.5),
-    keel_wire(-8,FX+2,80.9+1.9*growth,14.5-12.1*growth,22.5+5.5*growth),
-    keel_wire(-14.9,64,82.8,2.4,28),
-    keel_wire(-16.1,64,82.8,2.4,28),
-    keel_wire(-20,60.5,82.8,2.4,28),
-    keel_wire(SPLIT_Y,60.5,82.8,2.4,28)],True,True)
+    keel_wire(-8,FX+2,80.9+1.9*growth,14.5-(14.5-BASE)*growth,22.5+5.5*growth),
+    keel_wire(-14.9,64,82.8,BASE,28),
+    keel_wire(-16.1,64,82.8,BASE,28),
+    keel_wire(-20,60.5,82.8,BASE,28),
+    keel_wire(SPLIT_Y,60.5,82.8,BASE,28)],True,True)
 # Preserve the integral lower roof's envelope and its 0.2 mm strap clearance.
-keel=keel.cut(box(120,100,30,-56,-50,-13.8))
+keel=keel.cut(box(120,100,30,-56,-50,STRAP_BOTTOM-30))
 adapter_outer=adapter_outer.fuse(keel)
 # An upper shoulder supports the full inlet collar before it appears in the build.
 shoulder=Part.makeLoft([keel_wire(2,FX+2,80.9,22.5,23),
@@ -250,7 +256,7 @@ assembly=union(allparts)
 allair=air.fuse(adapter_air).removeSplitter()
 fullouter=outer.fuse(adapter_outer).fuse(upper_ear).fuse(lower_ear).fuse(front_web).fuse(keys).removeSplitter()
 report={
-    'design':'one-piece bridged lower duct; captured side keys; two M3-bolted adapter halves',
+    'design':'slim tangent-bend one-piece lower duct; captured side keys; two M3-bolted adapter halves',
     'parts':{}, 'collisions_mm3':{},
     'internal_fasteners':{'bolts':2,'type':'M3x10 socket-head','nuts':2,'nut_type':'M3 hex, nominal 5.5 mm AF / 2.4 mm thick','plastic_tapped_holes':0},
     'existing_mount_fasteners':'two M3x10 adapter-to-bracket fasteners retained; fan and H2 mounting hardware retained',
@@ -259,6 +265,10 @@ report={
     'bolt_hole_diameter_mm':3.4,'nut_pocket_across_flats_mm':nut_across_flats,
     'key_clearance_mm':0.25,'main_manifold_bridge_span_mm':14,
     'side_arm_roof_step_mm':0.4,'side_arm_channel_height_mm':SIDE_ROOF-FLOOR,
+    'lower_duct_height_mm':TOP-BASE,'previous_lower_duct_height_mm':15.0,
+    'manifold_floor_thickness_mm':FLOOR-BASE,'manifold_roof_thickness_mm':TOP-ROOF,
+    'manifold_channel_mm':[14,ROOF-FLOOR],'inlet_center_z_mm':(FLOOR+ROOF)/2,
+    'outer_bend_center_xy_mm':[-3.3,-20.5],'removed_square_shoulder_mm':2.0,
     'nozzle_bridge_span_mm':10,'nozzle_roof_step_mm':0.2,
     'nominal_wall_mm':WALL,'outlet_angle_deg':15,
 }

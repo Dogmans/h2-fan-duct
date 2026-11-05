@@ -4,13 +4,31 @@ Measures straight extrusion segments tagged as bridges against the solid at the
 preceding 0.2 mm layer. Sampling measures CAD support, not deposited infill or
 physical PETG sag. The generated G-code is geometry verification only.
 """
-import json, math, os, re
+import hashlib, json, math, os, re
 from FreeCAD import Vector as V
 
 ROOT=os.path.dirname(os.path.abspath(__file__))
 OUT=os.path.join(ROOT,'output','one_piece','slice_checks')
 d=App.getDocument('H2_5015_OnePiece') if 'H2_5015_OnePiece' in App.listDocuments() else App.openDocument(os.path.join(ROOT,'output','one_piece','H2_5015_OnePiece.FCStd'))
 solid=d.Print_lower_duct.Shape
+validation=json.load(open(os.path.join(ROOT,'output','one_piece','validation.json')))
+base=validation['parts']['lower_duct']['bounds'][4]
+roof_z=validation['inlet_center_z_mm']+validation['manifold_channel_mm'][1]/2
+roof_layers=[round(roof_z-base+0.2-validation['side_arm_roof_step_mm'],6),round(roof_z-base+0.2,6)]
+slices={}
+def cad_support(x,y,height):
+    # Cache planar sections instead of repeatedly classifying the entire BREP.
+    # Even-odd polygon inclusion handles both material islands and air holes.
+    key=round(height,6)
+    if key not in slices:
+        slices[key]=[[(p.x,p.y) for p in w.discretize(Deflection=0.02)]
+                     for w in solid.slice(V(0,0,1),key)]
+    inside=False
+    for polygon in slices[key]:
+        for a,b in zip(polygon,polygon[1:]+polygon[:1]):
+            if (a[1]>y)!=(b[1]>y) and x<(b[0]-a[0])*(y-a[1])/(b[1]-a[1])+a[0]:
+                inside=not inside
+    return inside
 lines=open(os.path.join(OUT,'lower_duct_verification.gcode')).readlines()
 meta=json.loads(next(line[len('; object:'):] for line in lines if line.startswith('; object:')))
 offset=[meta['boundingbox_center'][i]-meta['boundingbox_size'][i]/2 for i in [0,1]]
@@ -36,8 +54,7 @@ for line in lines:
         support=[]
         for i in range(n+1):
             t=i/n
-            point=V(x+(nx-x)*t-offset[0],y+(ny-y)*t-offset[1],z-0.25)
-            support.append(solid.isInside(point,1e-6,True))
+            support.append(cad_support(x+(nx-x)*t-offset[0],y+(ny-y)*t-offset[1],z-0.25))
         run=longest=0
         for supported in support:
             run=0 if supported else run+1
@@ -50,8 +67,8 @@ for line in lines:
     x,y,z=nx,ny,nz
     e=e+values.get('E',0) if relative_e else values.get('E',e)
 
-roof=[r for r in rows if 10.6<r['print_z_mm']<11.3 and r['feature']=='Bridge infill']
-report={'method':'0.15 mm CAD support sampling 0.05 mm below previous layer top; 0.2 mm layers',
+roof=[r for r in rows if any(abs(r['print_z_mm']-h)<1e-5 for h in roof_layers) and r['feature']=='Bridge infill']
+report={'method':'0.15 mm samples on CAD sections discretized to 0.02 mm; 0.05 mm below previous layer top; 0.2 mm layers',
     'physical_print_tested':False,'bridge_segments':len(rows),'manifold_roof_segments':len(roof),
     'roof_layers_print_z_mm':sorted(set(r['print_z_mm'] for r in roof)),
     'max_roof_unsupported_run_mm':max(r['max_unsupported_run_mm'] for r in roof),
@@ -59,6 +76,14 @@ report={'method':'0.15 mm CAD support sampling 0.05 mm below previous layer top;
     'roof_segments_with_both_ends_on_cad':sum(all(r['ends_on_previous_layer']) for r in roof),
     'longest_roof_runs':sorted(roof,key=lambda r:r['max_unsupported_run_mm'],reverse=True)[:12],
     'all_bridge_segments':rows}
+report['source_sha256']={name:hashlib.sha256(open(os.path.join(ROOT,'output','one_piece',name),'rb').read()).hexdigest()
+                         for name in ['lower_duct_print.stl','slice_checks/lower_duct_verification.gcode']}
+# Independently confirm all roof anchors against the exact BREP, without the
+# section-polyline approximation used for the much denser span sampling.
+endpoints=[solid.isInside(V(p[0],p[1],r['print_z_mm']-0.25),1e-6,True)
+           for r in roof for p in [r['start_print_xy_mm'],r['end_print_xy_mm']]]
+report['exact_brep_roof_endpoints']={'checked':len(endpoints),'supported':sum(endpoints)}
 json.dump(report,open(os.path.join(OUT,'lower_duct_bridge_audit.json'),'w'),indent=2)
 print(json.dumps({k:v for k,v in report.items() if k not in ['all_bridge_segments','longest_roof_runs']},indent=2))
 assert roof and report['max_roof_unsupported_run_mm']<16,'Long manifold bridge remains'
+assert all(endpoints),'Roof bridge endpoint lacks previous-layer CAD support'
