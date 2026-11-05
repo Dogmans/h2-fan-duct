@@ -1,5 +1,9 @@
 # BIQU H2 right-end 5015 blower and opposed cooling ducts
 
+![CAD rendering of the support-free duct mounted on the BIQU H2 extruder with the right-side 5015 blower and combined chain bracket](output/support_free/assembled.png)
+
+*Current assembly in situ: orange four-section duct, blue mounting bracket and right-side 5015 blower. The extruder and carriage references are shown translucent.*
+
 The blower is mounted flat against the **right motor end**, with its intake facing right. A combined chain / fan bracket replaces the existing 3 mm chain plate and shares its two H2 M3 holes. The original 3510 heatsink cooling fan stays in place.
 
 The current model is `output/support_free/H2_5015_SupportFree.FCStd`, built through the FreeCAD MCP bridge. Its four duct sections are designed for printing **without supports, using short bridges**: a flat-bottom tray with integrated nozzle roofs, a flat cover and two cavity-up adapter halves. The blue mounting bracket retains its native PartDesign features. See [printing and assembly instructions](output/support_free/PRINTING.md), including the revised M2x8 adapter joints and the recorded slicer bridge alerts.
