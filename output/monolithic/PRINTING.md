@@ -28,10 +28,10 @@ The complete duct uses **only the two existing M3x10 button-head mounting bolts*
 
 1. Inspect and clean the single print, including the closed elbow and both outlets. Check that the mounting bolts and washers fit, and that the air route is clear.
 2. Fit the duct to the existing right-side bracket with the two M3 mounting bolts. Check actual bolt length and engagement before tightening. The reference bolt/washer models in FreeCAD are excluded from the STL and STEP.
-3. Bring the blower outlet to the duct inlet as a butt joint at Z=28 mm. Seal the outside of that seam with thin foam or tape if needed. There is no adapter split or adapter-to-lower-duct seam to seal.
+3. Use the revised bracket at `../right_face/h2_5015_right_bracket.stl` for vertical fan adjustment. Loosen both fan screws and lower the blower to close the real 1-2 mm gap, then tighten them evenly. The slots provide 3 mm down and 1 mm up from nominal; the captive nuts slide with the screws. Stop when the blower outlet meets the duct inlet as a butt joint at Z=28 mm. The full downward travel is only usable if the actual housing leaves clearance; do not force the fan into the inlet. Seal the outside of that seam with thin foam or tape if needed. There is no adapter split or adapter-to-lower-duct seam to seal.
 4. On the cool printer, check the heater sock, nozzle, wiring and full carriage travel. Modeled heater clearance is about 2.10 mm; the lowest duct surface stays 1 mm above the nozzle datum. The duct projects 20.9 mm to the right of the H2 body and 14.65 mm toward the camera beyond the body.
 
-Use this complete single print in place of the previous three duct parts. The existing mounting bracket is unchanged. Previous `output/one_piece`, `output/support_free` and `output/printable` designs remain historical alternatives.
+Use this complete single print in place of the previous three duct parts. The revised bracket replaces its sideways fan slots with vertical slots and matching captive-nut recesses; reprint the bracket to gain adjustment. An assembly copy with the revised bracket is at `../right_face/H2_5015_AdjustableMount.FCStd`. Previous `output/one_piece`, `output/support_free` and `output/printable` designs remain historical alternatives.
 
 ## Verification and limitations
 

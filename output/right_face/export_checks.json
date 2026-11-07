@@ -1,11 +1,11 @@
 {
   "h2_5015_right_bracket": {
-    "stl_facets": 4596,
+    "stl_facets": 4732,
     "stl_edges_not_two": 0,
     "stl_solid": true,
     "step_valid": true,
     "step_solids": 1,
-    "step_volume": 9724.40784623816
+    "step_volume": 9731.333266166148
   },
   "h2_5015_right_twin_duct": {
     "stl_facets": 6874,

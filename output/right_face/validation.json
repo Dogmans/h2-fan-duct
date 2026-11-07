@@ -12,19 +12,21 @@
     "outlet_width": 10.0,
     "outlet_height": 3.4,
     "outlet_z": 3.8,
-    "nozzle_side_distance": 9.5
+    "nozzle_side_distance": 9.5,
+    "fan_adjust_down": 3.0,
+    "fan_adjust_up": 1.0
   },
   "parts": {
     "bracket": {
       "valid": true,
       "solids": 1,
-      "volume_mm3": 9724.407846238868,
+      "volume_mm3": 9731.33326616683,
       "bounds": [
         28.90000000000005,
         67.90000000000006,
-        -31.19436009231746,
-        22.270843275022372,
-        13.500000000000046,
+        -31.20000000000014,
+        22.299999999999986,
+        13.500000000000048,
         117.70000000000022
       ]
     },
@@ -37,7 +39,7 @@
         82.80000000000001,
         -32.15,
         13.0,
-        1.0748701226308417,
+        1.0748701226308413,
         28.0
       ]
     },
@@ -97,6 +99,14 @@
       "blower": 0.0
     }
   },
+  "fan_vertical_adjustment_mm": {
+    "down": 3.0,
+    "up": 1.0,
+    "slot_width": 3.3,
+    "slot_overall_length": 7.3,
+    "minimum_nut_end_wall": 2.0000000000000004,
+    "note": "Usable downward travel ends at the real fan/duct butt joint; nominal reference already meets duct."
+  },
   "heater_clearance_mm": 2.0411786733120465,
   "air_blockage_mm3": 0.0,
   "air_openings": [
@@ -112,12 +122,12 @@
   "added_right_mm_fan": 19.0,
   "added_right_mm_including_socket": 20.900000000000013,
   "added_near_mm": 14.649999999999999,
-  "lowest_duct_mm": 1.0748701226308417,
+  "lowest_duct_mm": 1.0748701226308413,
   "jet_area_mm2_each": 34.0,
   "jet_target_z_mm": 0.34251356816005085,
   "rod_clearance_mm": {
     "fan": 3.9524267197385394,
-    "bracket": 15.311881774698872
+    "bracket": 15.311881774698852
   },
   "bracket_duct_interference_mm3": 0.0
 }

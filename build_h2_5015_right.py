@@ -6,15 +6,18 @@ import os, json, math
 import Part, Sketcher, MeshPart
 from FreeCAD import Vector as V
 
-ROOT=r'D:\Documents\git\biqu-h2-duct'
+ROOT=os.path.dirname(os.path.abspath(__file__))
 OUT=os.path.join(ROOT,'output','right_face')
 os.makedirs(OUT,exist_ok=True)
 P=dict(fan_center_y=-3.0,fan_outlet_z=28.0,fan_thickness=15.0,
        right_frame_thickness=4.0,socket_x=15.6,socket_y=20.0,
        main_wall=1.6,branch_wall=1.2,outlet_width=10.0,
-       outlet_height=3.4,outlet_z=3.8,nozzle_side_distance=9.5)
+       outlet_height=3.4,outlet_z=3.8,nozzle_side_distance=9.5,
+       fan_adjust_down=3.0,fan_adjust_up=1.0)
 cfg=os.path.join(ROOT,'right_face_parameters.json')
 if os.path.exists(cfg): P.update({k:v for k,v in json.load(open(cfg)).items() if k in P})
+assert P['fan_adjust_down']>=0 and P['fan_adjust_up']>=0
+assert P['fan_adjust_down']+P['fan_adjust_up']>0,'Fan slots need positive travel'
 name='H2_5015_Right'
 if name in App.listDocuments(): App.closeDocument(name)
 doc=App.newDocument(name)
@@ -34,8 +37,9 @@ def fuse(parts):
     return s.removeSplitter()
 def feature(name,label,s,color,group=None,visible=True):
     o=doc.addObject('Part::Feature',name); o.Label=label; o.Shape=s
-    o.ViewObject.ShapeColor=color; o.ViewObject.LineColor=(0.13,0.16,0.19)
-    o.ViewObject.Deviation=0.1
+    if App.GuiUp:
+        o.ViewObject.ShapeColor=color; o.ViewObject.LineColor=(0.13,0.16,0.19)
+        o.ViewObject.Deviation=0.1
     if group: group.addObject(o)
     o.Visibility=visible
     return o
@@ -52,7 +56,8 @@ def yz_rail(a,b,r):
 # Measured/drawn reference envelopes, not printable components.
 body=box(61.9,35,35,0,-17.5,22.2)
 for z in [32.2,47.2]: body=body.cut(cy(1.5,5,37.4,-18,z))
-o=feature('H2Body','H2 original body and motor envelope',body,(0.30,0.32,0.35),refs); o.ViewObject.Transparency=65
+o=feature('H2Body','H2 original body and motor envelope',body,(0.30,0.32,0.35),refs)
+if App.GuiUp: o.ViewObject.Transparency=65
 stock=box(10,35,35,-14.9,-17.5,22.2).cut(cx(14,12,-15.9,0,39.7))
 feature('Stock3510','KEEP - stock 3510 heatsink cooling fan',stock,(0.23,0.25,0.28),refs)
 heater=box(24,20,12,2,-8.7,9)
@@ -68,7 +73,8 @@ toprod=Part.makeCylinder(4,110,V(50.4,-40,82.2),V(0,1,0))
 topbearing=Part.makeCylinder(11.5,45,V(50.4,-17.5,82.2),V(0,1,0)).cut(toprod)
 backbearing=Part.makeCylinder(11.5,45,V(14.9,29,59.2),V(1,0,0)).cut(crossrod)
 carriage=fuse([topbearing,backbearing])
-o=feature('CarriageEnvelope','Carriage bearing envelopes - verify installed variant',carriage,(0.48,0.51,0.55),refs); o.ViewObject.Transparency=80
+o=feature('CarriageEnvelope','Carriage bearing envelopes - verify installed variant',carriage,(0.48,0.51,0.55),refs)
+if App.GuiUp: o.ViewObject.Transparency=80
 o=feature('RodKeepouts','8 mm rods inferred from bearing positions',Part.makeCompound([crossrod,toprod]),(0.67,0.70,0.74),refs,False)
 
 # Combined chain and fan bracket replaces the original 3 mm chain plate.
@@ -108,6 +114,11 @@ fanholes=[(fc-22.2,zc+21.6),(fc+19.3,zc-17.4)]
 frame=fuse([yz_rail((-17.5,48),fanholes[0],6),yz_rail((-17.5,48),fanholes[1],6),
             yz_rail(fanholes[0],fanholes[1],6),yz_rail(fanholes[1],(2.5,18.5),5)])
 frame=frame.fuse(box(P['right_frame_thickness'],21,8,61.9,-8,14.5)).removeSplitter()
+# Extend each ear along the adjustment path, keeping 2 mm around its nut recess.
+nut_radius=3.32; nut_half_width=2.875; ear_radius=nut_radius+2.0
+for y,z in fanholes:
+    frame=frame.fuse(yz_rail((y,z-P['fan_adjust_down']),(y,z+P['fan_adjust_up']),ear_radius))
+frame=frame.removeSplitter()
 fs=outline_sketch('MotorEndFrameOutline',frame,'X',61.9,bracket)
 fp=bracket.newObject('PartDesign::Pad','MotorEndFramePad'); fp.Profile=fs; fp.Length=P['right_frame_thickness']
 doc.recompute(); fs.Visibility=False; pocket.Visibility=False
@@ -120,19 +131,24 @@ doc.recompute(); ns.Visibility=False; fp.Visibility=False
 fh=bracket.newObject('Sketcher::SketchObject','FanAndDuctHoles')
 fh.Placement=App.Placement(V(fx+2,0,0),App.Rotation(V(0,1,0),V(0,0,1),V(1,0,0),'ZXY'))
 for y,z in fanholes:
-    # M3 slots, +/-1.5 mm in Y; large washers span 5015 housing holes.
-    a=y-1.5; b=y+1.5; r=1.65
-    fh.addGeometry(Part.LineSegment(V(a,z+r,0),V(b,z+r,0)),False)
-    fh.addGeometry(Part.Arc(V(b,z+r,0),V(b+r,z,0),V(b,z-r,0)),False)
-    fh.addGeometry(Part.LineSegment(V(b,z-r,0),V(a,z-r,0)),False)
-    fh.addGeometry(Part.Arc(V(a,z-r,0),V(a-r,z,0),V(a,z+r,0)),False)
+    # Vertical M3 slots: lower the real fan to meet the fixed duct inlet.
+    a=z-P['fan_adjust_down']; b=z+P['fan_adjust_up']; r=1.65
+    fh.addGeometry(Part.LineSegment(V(y-r,a,0),V(y-r,b,0)),False)
+    fh.addGeometry(Part.Arc(V(y-r,b,0),V(y,b+r,0),V(y+r,b,0)),False)
+    fh.addGeometry(Part.LineSegment(V(y+r,b,0),V(y+r,a,0)),False)
+    fh.addGeometry(Part.Arc(V(y+r,a,0),V(y,a-r,0),V(y-r,a,0)),False)
 for y in [-3,8]: fh.addGeometry(Part.Circle(V(y,18.5,0),V(0,0,1),1.65),False)
 doc.recompute(); fix=bracket.newObject('PartDesign::Pocket','FanAndDuctFixings'); fix.Profile=fh; fix.Length=P['right_frame_thickness']+2.1
 doc.recompute(); fh.Visibility=False; np.Visibility=False
 fn=bracket.newObject('Sketcher::SketchObject','FanNutTrapSketch')
 fn.Placement=App.Placement(V(61.9,0,0),App.Rotation(V(0,1,0),V(0,0,1),V(1,0,0),'ZXY'))
 for y,z in fanholes:
-    vs=[V(y+a,z+b,0) for a,b in [(-4.82,0),(-3.16,-2.875),(3.16,-2.875),(4.82,0),(3.16,2.875),(-3.16,2.875)]]
+    # A vertically swept hex keeps parallel flats to stop the M3 nut spinning.
+    low=z-P['fan_adjust_down']; high=z+P['fan_adjust_up']
+    vs=[V(y+a,b,0) for a,b in [(-nut_half_width,low-nut_radius/2),
+        (0,low-nut_radius),(nut_half_width,low-nut_radius/2),
+        (nut_half_width,high+nut_radius/2),(0,high+nut_radius),
+        (-nut_half_width,high+nut_radius/2)]]
     for a,b in zip(vs,vs[1:]+vs[:1]): fn.addGeometry(Part.LineSegment(a,b),False)
 doc.recompute(); fnp=bracket.newObject('PartDesign::Pocket','FanCaptiveNuts'); fnp.Profile=fn; fnp.Length=2.5; fnp.Reversed=True
 doc.recompute(); fn.Visibility=False; fix.Visibility=False
@@ -142,7 +158,8 @@ for y in [-3,8]:
     vs=[V(y+3.32*math.cos(i*math.pi/3),18.5+3.32*math.sin(i*math.pi/3),0) for i in range(6)]
     for a,b in zip(vs,vs[1:]+vs[:1]): nh.addGeometry(Part.LineSegment(a,b),False)
 doc.recompute(); final=bracket.newObject('PartDesign::Pocket','M3CaptiveNuts'); final.Profile=nh; final.Length=2.5; final.Reversed=True
-doc.recompute(); nh.Visibility=False; fnp.Visibility=False; final.ViewObject.ShapeColor=(0.13,0.51,0.69)
+doc.recompute(); nh.Visibility=False; fnp.Visibility=False
+if App.GuiUp: final.ViewObject.ShapeColor=(0.13,0.51,0.69)
 
 # Standard 5015 silhouette: BeCool 5015-1 dimensioned hole coordinates.
 parts=[cx(24.5,ft,fx,fc,zc),box(ft,19.3,26,fx,fc-27.2,fz)]
@@ -197,6 +214,10 @@ ductobj.addProperty('App::PropertyString','DesignStatus').DesignStatus='Prototyp
 doc.recompute()
 
 report={'layout':'RIGHT motor end; intake points right (+X)','parameters':P,'parts':{},'collisions_mm3':{}}
+report['fan_vertical_adjustment_mm']={'down':P['fan_adjust_down'],'up':P['fan_adjust_up'],
+    'slot_width':3.3,'slot_overall_length':3.3+P['fan_adjust_down']+P['fan_adjust_up'],
+    'minimum_nut_end_wall':ear_radius-nut_radius,
+    'note':'Usable downward travel ends at the real fan/duct butt joint; nominal reference already meets duct.'}
 for key,s in [('bracket',final.Shape),('duct',duct),('air',air)]:
     b=s.BoundBox; report['parts'][key]={'valid':s.isValid(),'solids':len(s.Solids),'volume_mm3':s.Volume,'bounds':[b.XMin,b.XMax,b.YMin,b.YMax,b.ZMin,b.ZMax]}
 for key,s in [('body',body),('heater',heater),('nozzle',nozzle),('stock_3510',stock),('connector',connector),('blower',blower),('carriage',carriage),('rods',Part.makeCompound([crossrod,toprod]))]:
@@ -229,6 +250,7 @@ for ob,key in [(final,'h2_5015_right_bracket'),(ductobj,'h2_5015_right_twin_duct
     MeshPart.meshFromShape(Shape=ob.Shape,LinearDeflection=0.06,AngularDeflection=0.12,Relative=False).write(os.path.join(OUT,key+'.stl'))
 Part.makeCompound([final.Shape,duct]).exportStep(os.path.join(OUT,'h2_5015_right_printed_assembly.step'))
 json.dump(P,open(cfg,'w'),indent=2); json.dump(report,open(os.path.join(OUT,'validation.json'),'w'),indent=2)
-Gui.activeDocument().activeView().viewAxonometric(); Gui.activeDocument().activeView().fitAll()
+if App.GuiUp:
+    Gui.activeDocument().activeView().viewAxonometric(); Gui.activeDocument().activeView().fitAll()
 doc.recompute(); doc.saveAs(os.path.join(OUT,'H2_5015_Right.FCStd'))
 print(json.dumps(report,indent=2))

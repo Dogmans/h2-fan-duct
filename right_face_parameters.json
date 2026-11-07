@@ -10,5 +10,7 @@
   "outlet_width": 10.0,
   "outlet_height": 3.4,
   "outlet_z": 3.8,
-  "nozzle_side_distance": 9.5
+  "nozzle_side_distance": 9.5,
+  "fan_adjust_down": 3.0,
+  "fan_adjust_up": 1.0
 }
