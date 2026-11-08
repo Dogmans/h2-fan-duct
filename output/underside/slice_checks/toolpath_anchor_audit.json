@@ -1,0 +1,155 @@
+{
+  "method": "0.2 mm samples within 0.48 mm of preceding-layer paths, or already printed paths on the same layer; bridge spans use preceding layer only",
+  "note": "A nearby anchor does not prove support along an entire path or predict physical printing.",
+  "parts": [
+    {
+      "part": "duct",
+      "physical_print_tested": false,
+      "layers": 124,
+      "runs_checked": 3777,
+      "unanchored_runs": [],
+      "runs_touching_only_earlier_same_layer_extrusions": [],
+      "bridge_paths": 575,
+      "max_bridge_unsupported_run_mm": 15.143218390804558,
+      "bridge_paths_with_both_ends_anchored": 575,
+      "longest_bridge_paths": [
+        {
+          "z_mm": 23.4,
+          "max_unsupported_run_mm": 15.143218390804558,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 23.4,
+          "max_unsupported_run_mm": 15.143218390804558,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 23.4,
+          "max_unsupported_run_mm": 15.143218390804558,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 23.4,
+          "max_unsupported_run_mm": 15.143218390804558,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 23.4,
+          "max_unsupported_run_mm": 15.143218390804558,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 23.4,
+          "max_unsupported_run_mm": 15.143218390804558,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 23.4,
+          "max_unsupported_run_mm": 15.143218390804558,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 23.4,
+          "max_unsupported_run_mm": 15.143218390804558,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 23.4,
+          "max_unsupported_run_mm": 15.143218390804558,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 23.4,
+          "max_unsupported_run_mm": 15.143218390804558,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 23.4,
+          "max_unsupported_run_mm": 15.143218390804558,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 23.4,
+          "max_unsupported_run_mm": 15.143218390804558,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 23.4,
+          "max_unsupported_run_mm": 15.091678160919534,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 23.4,
+          "max_unsupported_run_mm": 15.060229885057474,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 23.4,
+          "max_unsupported_run_mm": 15.060229885057474,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        }
+      ],
+      "stl_sha256": "590125f9a614e13c00372a85a55227122a3889265968de2ad4a67335594357d2",
+      "gcode_sha256": "14d8317eedbe61d16a2cea887882f9857abb295d5a373cbfe02137e6ff2117a7"
+    },
+    {
+      "part": "chain_plate",
+      "physical_print_tested": false,
+      "layers": 15,
+      "runs_checked": 540,
+      "unanchored_runs": [],
+      "runs_touching_only_earlier_same_layer_extrusions": [],
+      "bridge_paths": 0,
+      "max_bridge_unsupported_run_mm": 0,
+      "bridge_paths_with_both_ends_anchored": 0,
+      "longest_bridge_paths": [],
+      "stl_sha256": "4183b18f055ab2193aaec775fef8b0d22da426019e2823eac422d6d281f3884b",
+      "gcode_sha256": "53a578039f2f401443713e139f7acb25fba4e8f065c5b9a8de60c82973e1f88c"
+    }
+  ]
+}

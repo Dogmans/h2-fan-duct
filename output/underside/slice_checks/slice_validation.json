@@ -1,0 +1,32 @@
+[
+    {
+        "exit_code":  0,
+        "engine":  "arachne",
+        "warnings":  1,
+        "supports":  false,
+        "fill_density":  "100%",
+        "layer_height_mm":  0.2,
+        "part":  "duct",
+        "nozzle_mm":  0.4
+    },
+    {
+        "exit_code":  0,
+        "engine":  "arachne",
+        "warnings":  0,
+        "supports":  true,
+        "fill_density":  "20%",
+        "layer_height_mm":  0.2,
+        "part":  "fan_bracket",
+        "nozzle_mm":  0.4
+    },
+    {
+        "exit_code":  0,
+        "engine":  "arachne",
+        "warnings":  0,
+        "supports":  false,
+        "fill_density":  "100%",
+        "layer_height_mm":  0.2,
+        "part":  "chain_plate",
+        "nozzle_mm":  0.4
+    }
+]

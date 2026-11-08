@@ -1,0 +1,204 @@
+
+exit_code engine  warnings supports fill_density layer_height_mm part        nozzle_mm
+--------- ------  -------- -------- ------------ --------------- ----        ---------
+        0 arachne        1    False 100%                     0.2 duct              0.4
+        0 arachne        0     True 20%                      0.2 fan_bracket       0.4
+        0 arachne        0    False 100%                     0.2 chain_plate       0.4
+
+
+WARNING: Slicer alerts are retained in slice_checks logs. Inspect bridges before printing.
+{
+  "method": "0.2 mm samples within 0.48 mm of preceding-layer paths, or already printed paths on the same layer; bridge spans use preceding layer only",
+  "note": "A nearby anchor does not prove support along an entire path or predict physical printing.",
+  "parts": [
+    {
+      "part": "duct",
+      "physical_print_tested": false,
+      "layers": 86,
+      "runs_checked": 3647,
+      "unanchored_runs": [],
+      "runs_touching_only_earlier_same_layer_extrusions": [
+        {
+          "print_z_mm": 9.8,
+          "feature": "Bridge infill",
+          "length_mm": 5.89741104214384,
+          "start_xy": [
+            127.549,
+            91.905
+          ],
+          "end_xy": [
+            126.398,
+            86.121
+          ]
+        },
+        {
+          "print_z_mm": 9.8,
+          "feature": "Bridge infill",
+          "length_mm": 3.5206786277648288,
+          "start_xy": [
+            126.862,
+            86.079
+          ],
+          "end_xy": [
+            127.549,
+            89.532
+          ]
+        },
+        {
+          "print_z_mm": 9.8,
+          "feature": "Bridge infill",
+          "length_mm": 1.1470836935463784,
+          "start_xy": [
+            127.549,
+            87.158
+          ],
+          "end_xy": [
+            127.325,
+            86.033
+          ]
+        }
+      ],
+      "bridge_paths": 547,
+      "max_bridge_unsupported_run_mm": 15.356324220108345,
+      "bridge_paths_with_both_ends_anchored": 527,
+      "longest_bridge_paths": [
+        {
+          "z_mm": 9.8,
+          "max_unsupported_run_mm": 15.356324220108345,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 9.8,
+          "max_unsupported_run_mm": 15.246640894902885,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 9.8,
+          "max_unsupported_run_mm": 15.103286906912063,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 9.8,
+          "max_unsupported_run_mm": 15.025615573800865,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 9.8,
+          "max_unsupported_run_mm": 14.799780251655793,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 9.8,
+          "max_unsupported_run_mm": 14.707210873169556,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 9.8,
+          "max_unsupported_run_mm": 14.094976757993068,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 9.6,
+          "max_unsupported_run_mm": 12.748985507246394,
+          "ends_anchored": [
+            false,
+            true
+          ]
+        },
+        {
+          "z_mm": 9.6,
+          "max_unsupported_run_mm": 12.655304347826103,
+          "ends_anchored": [
+            true,
+            false
+          ]
+        },
+        {
+          "z_mm": 9.6,
+          "max_unsupported_run_mm": 12.547191176470607,
+          "ends_anchored": [
+            false,
+            true
+          ]
+        },
+        {
+          "z_mm": 9.6,
+          "max_unsupported_run_mm": 12.452691176470603,
+          "ends_anchored": [
+            true,
+            false
+          ]
+        },
+        {
+          "z_mm": 9.6,
+          "max_unsupported_run_mm": 12.344477611940285,
+          "ends_anchored": [
+            false,
+            true
+          ]
+        },
+        {
+          "z_mm": 9.6,
+          "max_unsupported_run_mm": 12.25101492537313,
+          "ends_anchored": [
+            true,
+            false
+          ]
+        },
+        {
+          "z_mm": 9.8,
+          "max_unsupported_run_mm": 12.145657726747945,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 9.6,
+          "max_unsupported_run_mm": 12.142696969696964,
+          "ends_anchored": [
+            false,
+            true
+          ]
+        }
+      ],
+      "stl_sha256": "684f0fa5a8429554aad0322bb34aa41702437beda2b5229cf342deb7e15c41d6",
+      "gcode_sha256": "43ae3f5f9157fb5ddac469d45731233bb55fbffd06ab51c43e5b748d7fe6a9d2"
+    },
+    {
+      "part": "chain_plate",
+      "physical_print_tested": false,
+      "layers": 15,
+      "runs_checked": 540,
+      "unanchored_runs": [],
+      "runs_touching_only_earlier_same_layer_extrusions": [],
+      "bridge_paths": 0,
+      "max_bridge_unsupported_run_mm": 0,
+      "bridge_paths_with_both_ends_anchored": 0,
+      "longest_bridge_paths": [],
+      "stl_sha256": "4183b18f055ab2193aaec775fef8b0d22da426019e2823eac422d6d281f3884b",
+      "gcode_sha256": "149f7c3f08c25d10f82100c1aa87d1fc75a588c7125242eab1eabb28609bee36"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+
+exit_code engine  warnings supports fill_density layer_height_mm part        nozzle_mm
+--------- ------  -------- -------- ------------ --------------- ----        ---------
+        0 arachne        1    False 100%                     0.2 duct              0.4
+        0 arachne        0     True 20%                      0.2 fan_bracket       0.4
+        0 arachne        0    False 100%                     0.2 chain_plate       0.4
+        0 arachne        0    False 100%                     0.2 spacer_2mm        0.4
+        0 arachne        0    False 100%                     0.2 spacer_4mm        0.4
+
+
+WARNING: Slicer alerts are retained in slice_checks logs. Inspect bridges before printing.

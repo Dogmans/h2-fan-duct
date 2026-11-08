@@ -1,0 +1,12 @@
+{
+  "intake_gap_mm": 8.0,
+  "fan_shift_y_mm": 17.0,
+  "fan_shift_z_mm": -22.0,
+  "rod_diameter_mm": 8.0,
+  "wall_mm": 1.6,
+  "channel_width_mm": 7.0,
+  "channel_height_mm": 8.0,
+  "bottom_mount_x_mm": 37.4,
+  "bottom_mount_y_mm": [-7.5, 7.5],
+  "bottom_mount_z_mm": 22.2
+}

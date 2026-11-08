@@ -1,0 +1,18 @@
+{
+  "motor_clearance_mm": 4.0,
+  "fan_shift_y_mm": 4.3,
+  "fan_shift_z_mm": -12.0,
+  "rod_diameter_mm": 8.0,
+  "wall_mm": 1.6,
+  "channel_width_mm": 7.0,
+  "channel_height_mm": 8.0,
+  "blend_radius_mm": 8.0,
+  "inlet_corner_radius_mm": 1.2,
+  "bottom_mount_x_mm": 37.4,
+  "bottom_mount_y_mm": [
+    -7.5,
+    7.5
+  ],
+  "bottom_mount_z_mm": 22.2,
+  "assembly_raise_mm": 4.0
+}

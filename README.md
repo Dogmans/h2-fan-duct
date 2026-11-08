@@ -1,4 +1,39 @@
-# BIQU H2 right-end 5015 blower and opposed cooling ducts
+# BIQU H2 adjustable underside O duct and outward-facing 5015
+
+![Underside-mounted O duct and downward-discharge blower](output/underside_down/assembled.png)
+
+The current assembly is [`output/underside_down/H2_5015_Underside_Down.FCStd`](output/underside_down/H2_5015_Underside_Down.FCStd). Its fan and complete duct can be raised together by **0, 2 or 4 mm**, giving **1, 3 or 5 mm clearance above the nozzle tip**. Two removable spacers set the duct height; the fan slides vertically to maintain the inlet joint. The H2 mounting bracket and separate chain plate stay fixed.
+
+| Assembly lift | Spacer at each duct bolt | Duct screws | Lowest duct above nozzle |
+| --- | --- | --- | --- |
+| 0 mm (saved assembly) | 4 mm | M3x12 | 1 mm |
+| +2 mm | 2 mm | M3x10 | 3 mm |
+| +4 mm | None | M3x8 | 5 mm |
+
+Retain **2 mm of washers at each duct screw** in all three settings. Use matching spacers and screw lengths at both mounts, raise the blower by the same amount and reseal its butt joint. Raised jets aim higher, so use the lowest setting that gives sufficient clearance and verify cooling on the printer.
+
+The obstructed lower fan nut now has an open loading channel through the rear support arm. Both nut paths are checked through the full slot travel. The slots are 3.3 x 8.3 mm, with captive sliding nuts and 1.5 mm retaining floors. Their extra 1 mm downward reserve corrects real fan fit; it does not permit lowering the nominal duct below its 1 mm setting.
+
+The outward intake and downward tangent elbow feed a closed O-shaped duct with nominal 7 x 8 mm passages. The fan is 1.7 mm farther forward than the previous revision to clear the rods when raised. The nozzle lips retract 1.5 mm from the heater sock; their nominal aim line remains approximately unchanged. A short rounded internal guide vane supports the wider elbow-blend roof.
+
+| Checked feature | Current adjustable assembly |
+| --- | --- |
+| Mount-side projection | 10.35 mm; 4.30 mm less than the original right-end design |
+| Rightward extension, including hardware | 22.15 mm |
+| Rearmost printed point | Y=26.6 mm |
+| Blower / bracket clearance to 8 mm rods at nominal height | 4.21 / 3.71 mm |
+| Minimum blower rod / heater clearance across the full lift | 2.27 / 2.00 mm |
+| Intake | No modeled obstruction in the 10 mm check zone at any height |
+
+Print [`duct_print.stl`](output/underside_down/duct_print.stl) and [`fan_bracket_print.stl`](output/underside_down/fan_bracket_print.stl), plus **two** copies of [`spacer_4mm_print.stl`](output/underside_down/spacer_4mm_print.stl) or [`spacer_2mm_print.stl`](output/underside_down/spacer_2mm_print.stl) for the selected setting. The existing [`chain_plate_print.stl`](output/underside_down/chain_plate_print.stl) is retained. The bracket needs external supports; the duct, chain plate and spacers use supports disabled. See the [printing and height-adjustment guide](output/underside_down/PRINTING.md).
+
+Regenerate with `build_underside_down_duct.py` through FreeCAD MCP, then render with `render_underside_down_duct.py`. Run `verify_underside.ps1 -Variant outward_down` and `python audit_underside_toolpaths.py --variant outward_down` for slicer/path checks. `output/underside_down/adjustable_mount_checks.json` records nut-loading paths, hardware and 17 coupled height positions; `validation.json` and `export_checks.json` record geometry, preservation and watertight exports. The source right-face and inward-facing artifacts remain preserved.
+
+This is a CAD and toolpath-reviewed prototype. Physical fit, stiffness, thermal behavior and cooling require testing. The duct retains slicer alerts documented in the guide; verification G-code is not printer-ready.
+
+## Historical right-end revision
+
+**The sections below describe the preserved previous design. Use the underside files and guide above for the new assembly.**
 
 ![CAD rendering of the single-print blower-to-nozzle duct installed on the BIQU H2 extruder](output/monolithic/assembled.png)
 
