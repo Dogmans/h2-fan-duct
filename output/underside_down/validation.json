@@ -18,7 +18,11 @@
     "bottom_mount_z_mm": 22.2,
     "assembly_raise_mm": 4.0
   },
-  "source_sha256": "9847c14ee1bd571cb393084ab89ddb31d5cf9f4be97b415765055d085ea94cb8",
+  "input_sha256": {
+    "build_underside_down_duct.py": "1bb89009d40bed700183efc2eff40160c4c9bad7c837e8d8d139dd1e08cc6d51",
+    "h2_hardware_reference.py": "6e0a72ec5dc1f8a2fb683448f84325de765264998e20e3ad9213ed979733c3d5",
+    "underside_down_parameters.json": "6806eff0a27e045b1d0a34794e0a970a3a7e89aee6563a9975993e4cfc3033b8"
+  },
   "physical_print_tested": false,
   "elbow_blending": [
     {
@@ -29,11 +33,6 @@
       "blend_sidewall_mm": 1.5999935839816872
     }
   ],
-  "preserved_revision_sha256": {
-    "output/underside/H2_5015_Underside.FCStd": "6fb7f74d88d485a12f519ac1ee5abb11653d3db1385adcddf9220393d75ee45f",
-    "output/underside/duct_print.stl": "590125f9a614e13c00372a85a55227122a3889265968de2ad4a67335594357d2",
-    "output/underside/fan_bracket_print.stl": "b8adb84c33e1be722695200c1ae951e680a1b65e5e76a90a198c8c98fd2e6890"
-  },
   "hardware_checks_after_screw_membrane_removal": true,
   "airflow_tested": false,
   "parts": {
@@ -66,14 +65,14 @@
     "chain_plate": {
       "valid": true,
       "solids": 1,
-      "volume_mm3": 3162.7151240881035,
+      "volume_mm3": 3162.7151240880976,
       "bounds_mm": [
-        28.900000000000023,
-        45.900000000000034,
-        -20.500000000000277,
-        -17.49999999999999,
-        26.70000000000003,
-        117.7000000000001
+        28.9,
+        45.9,
+        -20.5,
+        -17.5,
+        26.7,
+        117.7
       ]
     }
   },
@@ -368,10 +367,8 @@
     -27.85,
     26.6,
     1.0,
-    117.7000000000001
+    117.7
   ],
   "added_mount_side_mm": 10.350000000000001,
-  "added_right_mm": 22.150000000000013,
-  "old_added_mount_side_mm": 14.65,
-  "recovered_mount_side_clearance_mm": 4.299999999999999
+  "added_right_mm": 22.150000000000013
 }

@@ -38,16 +38,16 @@
     "nonmanifold_edges": 0,
     "step_valid": true,
     "step_solids": 1,
-    "bed_area_mm2": 1054.2383746960315,
+    "bed_area_mm2": 1054.2383746960334,
     "steep_nonbridge_area_mm2": 0,
     "print_bounds_mm": [
-      17.00000000000001,
-      91.00000000000007,
-      3.0000000000002807
+      17.0,
+      91.0,
+      3.000000000000014
     ],
     "screw_hole_breakout_membrane_mm": 0,
     "mesh_linear_deflection_mm": 0.04,
-    "stl_sha256": "4183b18f055ab2193aaec775fef8b0d22da426019e2823eac422d6d281f3884b",
+    "stl_sha256": "b0872a78e92f1b449efeef0bcfe7ef0535b2ccb75e52344b4b03120968df7729",
     "supports": false
   },
   "spacer_2mm": {

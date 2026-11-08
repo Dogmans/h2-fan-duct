@@ -22,15 +22,15 @@ Raised jets also aim 2 or 4 mm higher. Use the lowest setting that provides clea
 
 ## Nut access and fit
 
-The lower fan nut was obstructed by the rear support arm. Its channel now passes through that arm, retaining the 1.5 mm floor toward the fan. Both elongated nut pockets have 5.75 mm across-flat loading clearance, parallel flats and a clear 11.9 mm approach from the motor-facing side. Fit the nuts before installing the bracket/fan; the check covers insertion geometry, not finger/tool ergonomics on every printer.
+The fan nut channels pass through the rear support arm, retaining the 1.5 mm floor toward the fan. Both elongated nut pockets have 5.75 mm across-flat loading clearance, parallel flats and a clear 11.9 mm approach from the motor-facing side. Fit the nuts before installing the bracket/fan; the check covers insertion geometry, not finger/tool ergonomics on every printer.
 
 ![Rear nut channels and underside attachment pad](rear_nut_access.png)
 
-The fan center is Y=1.3, Z=41.8 mm at nominal height, with its outlet at Z=16 mm. Its back remains 4 mm from the H2 motor end. Moving the fan forward by 1.7 mm maintains at least 2.27 mm modeled rod clearance at maximum lift. The fixed bracket has relief around the rising elbow.
+The fan center is Y=1.3, Z=41.8 mm at nominal height, with its outlet at Z=16 mm. Its back remains 4 mm from the H2 motor end. The modeled fan has at least 2.27 mm rod clearance at maximum lift. The fixed bracket has relief around the rising elbow.
 
 The O manifold retains nominal 7 x 8 mm air passages, 1.6 mm walls, staggered roofs and the tangent elbow. Its 8 mm return blend and six 1.2 mm inlet corner rounds remain. A 1.2 mm thick, 5.2 mm long rounded internal guide vane in the broad elbow blend anchors its printed roof. Air remains connected around both vane ends.
 
-The opposed mouths are now X=0 and 28, Y=1.3, centered near Z=4.10 mm at nominal height. Their 1.5 mm retraction and 0.4 mm rise preserve the nominal 15-degree aim line while maintaining **at least 2 mm clearance to the modeled heater sock throughout adjustment**. The nominal heater gap is 2.2 mm. Actual socks, wiring and fan housings vary.
+The opposed mouths are now X=0 and 28, Y=1.3, centered near Z=4.10 mm at nominal height. They aim inward and down at 15 degrees and maintain **at least 2 mm clearance to the modeled heater sock throughout adjustment**. The nominal heater gap is 2.2 mm. Actual socks, wiring and fan housings vary.
 
 Mount-side projection is 10.35 mm, rightward extension including hardware is 22.15 mm, and the rearmost printed point is Y=26.6 mm. At nominal height the blower/bracket rod gaps are 4.21/3.71 mm. The intake has an unobstructed modeled 32.5 mm diameter, 10 mm deep check zone at all heights; this is not a manufacturer clearance specification.
 
@@ -70,12 +70,12 @@ To change height later, support the duct, loosen both fan screws, remove the two
 
 ## Verification
 
-`validation.json` checks valid single-solid prints, one air route with three openings, zero reference/hardware/inter-part overlap, zero air/intake blockage and source preservation. `adjustable_mount_checks.json` adds 42 nut-loading positions and 17 coupled heights, including spacers, shortened duct screws, fan hardware, fixed references and inlet alignment. Minimum heater/rod clearances are 2.00/2.27 mm.
+`validation.json` checks valid single-solid prints, one air route with three openings, zero reference/hardware/inter-part overlap, zero air/intake blockage and build-input hashes. `adjustable_mount_checks.json` adds 42 nut-loading positions and 17 coupled heights, including spacers, shortened duct screws, fan hardware, fixed references and inlet alignment. Minimum heater/rod clearances are 2.00/2.27 mm.
 
 `export_checks.json` records all five STL files as watertight with zero nonmanifold edges, and all STEP files reopening as valid single solids. The duct has no non-flat downward facets beyond the 45-degree limit; the bracket needs external supports.
 
-SuperSlicer 2.7.62.0 completes all five parts. The duct retains bridge/loose-extrusion alerts; the bracket, chain plate and spacers have no slicer warnings. Inspect these alerts and the generated paths before printing. The path audit checks 3,420 duct runs, 540 chain-plate runs and 244 spacer runs, with no unanchored runs or runs relying only on earlier same-layer paths. The longest measured bridge is **14.57 mm**. `slice_checks/toolpath_anchor_audit.json` records checked STL/G-code hashes, extrusion anchors and bridge spans. Verification G-code omits heating/homing and is **not printer-ready**.
+SuperSlicer 2.7.62.0 completes all five parts. The duct retains bridge/loose-extrusion alerts; the bracket, chain plate and spacers have no slicer warnings. Inspect these alerts and the generated paths before printing. The path audit checks 3,420 duct runs, 534 chain-plate runs and 244 spacer runs, with no unanchored runs or runs relying only on earlier same-layer paths. The longest measured bridge is **14.57 mm**. `slice_checks/toolpath_anchor_audit.json` records checked STL/G-code hashes, extrusion anchors and bridge spans. Verification G-code omits heating/homing and is **not printer-ready**.
 
-Regenerate in FreeCAD with `build_underside_down_duct.py` and `render_underside_down_duct.py`. The builder invokes `verify_underside_adjustment.py` before exporting; that verifier can also check the saved assembly independently. Slice with `verify_underside.ps1 -Variant outward_down`, then run `python audit_underside_toolpaths.py --variant outward_down`. `-FailOnWarnings` rejects retained slicer alerts. Earlier right-face and inward-facing files are preserved.
+Regenerate in FreeCAD with `build_underside_down_duct.py` and `render_underside_down_duct.py`. The builder invokes `verify_underside_down_adjustment.py` before exporting; that verifier can also check the saved assembly independently. Slice with `verify_underside_down.ps1`, then run `python audit_underside_down_toolpaths.py`. `-FailOnWarnings` rejects retained slicer alerts.
 
 This remains a prototype reviewed in CAD and toolpaths. Physical fit, PETG sag, thermal creep, mount stiffness and airflow balance require testing.

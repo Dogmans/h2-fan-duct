@@ -1,9 +1,0 @@
-{
-  "method": "continuous extrusion runs sampled at <=1 mm, seeking prior-layer extrusion centerline within 0.48 mm",
-  "note": "a nearby anchor does not prove adequate support for the whole path or predict PETG sag",
-  "physical_print_tested": false,
-  "layers": 135,
-  "runs_checked": 4759,
-  "unanchored_runs": [],
-  "gcode_sha256": "0f1e85dea2416255118bb9a3e052b6d1d167637138ccce85d1f8a53246af0f46"
-}
