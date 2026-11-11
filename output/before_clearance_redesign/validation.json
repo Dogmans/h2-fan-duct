@@ -1,0 +1,374 @@
+{
+  "design": "underside O duct; outward intake 5015 with tangent downward elbow",
+  "parameters": {
+    "motor_clearance_mm": 4.0,
+    "fan_shift_y_mm": 4.3,
+    "fan_shift_z_mm": -12.0,
+    "rod_diameter_mm": 8.0,
+    "wall_mm": 1.6,
+    "channel_width_mm": 7.0,
+    "channel_height_mm": 8.0,
+    "blend_radius_mm": 8.0,
+    "inlet_corner_radius_mm": 1.2,
+    "bottom_mount_x_mm": 37.4,
+    "bottom_mount_y_mm": [
+      -7.5,
+      7.5
+    ],
+    "bottom_mount_z_mm": 22.2,
+    "assembly_raise_mm": 4.0
+  },
+  "input_sha256": {
+    "build_underside_down_duct.py": "1bb89009d40bed700183efc2eff40160c4c9bad7c837e8d8d139dd1e08cc6d51",
+    "h2_hardware_reference.py": "6e0a72ec5dc1f8a2fb683448f84325de765264998e20e3ad9213ed979733c3d5",
+    "underside_down_parameters.json": "6806eff0a27e045b1d0a34794e0a970a3a7e89aee6563a9975993e4cfc3033b8"
+  },
+  "physical_print_tested": false,
+  "elbow_blending": [
+    {
+      "inlet_corner_radius_mm": 1.2,
+      "rounded_edges": 6,
+      "cut_to_air_clearance_mm": 1.3410443691392118,
+      "blend_outer_radius_mm": 8.0,
+      "blend_sidewall_mm": 1.5999935839816872
+    }
+  ],
+  "hardware_checks_after_screw_membrane_removal": true,
+  "airflow_tested": false,
+  "parts": {
+    "duct": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 15613.570310156729,
+      "bounds_mm": [
+        -11.899999999999999,
+        82.80000000000001,
+        -27.85,
+        23.700000000000003,
+        1.0,
+        16.0
+      ]
+    },
+    "fan_bracket": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 7115.066732864759,
+      "bounds_mm": [
+        31.4,
+        65.9,
+        -26.9,
+        26.6,
+        16.800121364814295,
+        73.4
+      ]
+    },
+    "chain_plate": {
+      "valid": true,
+      "solids": 1,
+      "volume_mm3": 3162.7151240880976,
+      "bounds_mm": [
+        28.9,
+        45.9,
+        -20.5,
+        -17.5,
+        26.7,
+        117.7
+      ]
+    }
+  },
+  "collisions_mm3": {
+    "duct": {
+      "H2Body": 0.0,
+      "Stock3510": 0.0,
+      "HeaterSock": 0.0,
+      "Nozzle": 0.0,
+      "Heatbreak": 0.0,
+      "MotorConnector": 0.0,
+      "Blower5015": 0.0,
+      "CarriageEnvelope": 0.0,
+      "RodKeepouts": 0.0
+    },
+    "fan_bracket": {
+      "H2Body": 0.0,
+      "Stock3510": 0.0,
+      "HeaterSock": 0.0,
+      "Nozzle": 0.0,
+      "Heatbreak": 0.0,
+      "MotorConnector": 0.0,
+      "Blower5015": 0.0,
+      "CarriageEnvelope": 0.0,
+      "RodKeepouts": 0.0
+    },
+    "chain_plate": {
+      "H2Body": 0.0,
+      "Stock3510": 0.0,
+      "HeaterSock": 0.0,
+      "Nozzle": 0.0,
+      "Heatbreak": 0.0,
+      "MotorConnector": 0.0,
+      "Blower5015": 0.0,
+      "CarriageEnvelope": 0.0,
+      "RodKeepouts": 0.0
+    }
+  },
+  "hardware_collisions_mm3": {
+    "h2_1": {
+      "duct": 0.0,
+      "fan_bracket": 0.0,
+      "chain_plate": 0.0,
+      "references": 0.0
+    },
+    "h2_2": {
+      "duct": 0.0,
+      "fan_bracket": 0.0,
+      "chain_plate": 0.0,
+      "references": 0.0
+    },
+    "duct_1": {
+      "duct": 0.0,
+      "fan_bracket": 0.0,
+      "chain_plate": 0.0,
+      "references": 0.0
+    },
+    "duct_2": {
+      "duct": 0.0,
+      "fan_bracket": 0.0,
+      "chain_plate": 0.0,
+      "references": 0.0
+    },
+    "fan_1": {
+      "duct": 0.0,
+      "fan_bracket": 0.0,
+      "chain_plate": 0.0,
+      "references": 0.0
+    },
+    "fan_2": {
+      "duct": 0.0,
+      "fan_bracket": 0.0,
+      "chain_plate": 0.0,
+      "references": 0.0
+    }
+  },
+  "air_valid": true,
+  "air_solids": 1,
+  "air_openings": [
+    {
+      "volume": 187.20000000000044,
+      "bounds": [
+        65.60000000000001,
+        81.20000000000002,
+        -26.25,
+        -6.25,
+        16.0,
+        16.6
+      ]
+    },
+    {
+      "volume": 20.4386513319368,
+      "bounds": [
+        0.0,
+        0.6,
+        -3.7000000000000006,
+        6.300000000000001,
+        2.393558111343867,
+        5.800000000000002
+      ]
+    },
+    {
+      "volume": 20.438651331936832,
+      "bounds": [
+        27.4,
+        28.0,
+        -3.7,
+        6.300000000000001,
+        2.393558111343867,
+        5.800000000000002
+      ]
+    }
+  ],
+  "heater_clearance_mm": 2.200000000000001,
+  "blower_rod_clearance_mm": 4.211618730964692,
+  "bracket_rod_clearance_mm": 3.711618730964693,
+  "intake_clearance_mm": null,
+  "fan_back_to_motor_mm": 4.0,
+  "outward_intake_check_depth_mm": 10,
+  "frame_relief_window_mm": 37.0,
+  "fan_adjustment_axis": "Z",
+  "fan_adjustment_mm": [
+    -1,
+    4.0
+  ],
+  "vertical_leg_air_height_mm": 7.6,
+  "roof_stagger_mm": 0.4,
+  "nozzle_outlet_x_mm": [
+    0.0,
+    28.0
+  ],
+  "nozzle_outlet_y_mm": 1.3,
+  "nozzle_outlet_center_z_mm": 4.096779055671934,
+  "nozzle_angle_deg": 15,
+  "jet_area_mm2_each": 32.903701960058704,
+  "mount_pattern_note": "Underside M3 at X=37.4, Y=+/-7.5 follows supplied carriage SCAD; verify actual hole depths and wiring before fitting.",
+  "part_collisions_mm3": {
+    "duct_fan_bracket": 0.0,
+    "duct_chain_plate": 0.0,
+    "fan_bracket_chain_plate": 0.0
+  },
+  "air_blockage_mm3": 0.0,
+  "fixing_bore_air_clearance_mm": [
+    1.6999999999999993,
+    1.700000000000001
+  ],
+  "fixing_bore_air_overlap_mm3": [
+    0.0,
+    0.0
+  ],
+  "intake_blockage_mm3": 0.0,
+  "slot_checks": [
+    {
+      "offset_mm": -1.0,
+      "ear_y_mm": -20.9,
+      "shank_overlap_mm3": 0.0,
+      "nut_overlap_mm3": 0.0
+    },
+    {
+      "offset_mm": -1.0,
+      "ear_y_mm": 20.6,
+      "shank_overlap_mm3": 0.0,
+      "nut_overlap_mm3": 0.0
+    },
+    {
+      "offset_mm": -0.375,
+      "ear_y_mm": -20.9,
+      "shank_overlap_mm3": 0.0,
+      "nut_overlap_mm3": 0.0
+    },
+    {
+      "offset_mm": -0.375,
+      "ear_y_mm": 20.6,
+      "shank_overlap_mm3": 0.0,
+      "nut_overlap_mm3": 0.0
+    },
+    {
+      "offset_mm": 0.25,
+      "ear_y_mm": -20.9,
+      "shank_overlap_mm3": 0.0,
+      "nut_overlap_mm3": 0.0
+    },
+    {
+      "offset_mm": 0.25,
+      "ear_y_mm": 20.6,
+      "shank_overlap_mm3": 0.0,
+      "nut_overlap_mm3": 0.0
+    },
+    {
+      "offset_mm": 0.875,
+      "ear_y_mm": -20.9,
+      "shank_overlap_mm3": 0.0,
+      "nut_overlap_mm3": 0.0
+    },
+    {
+      "offset_mm": 0.875,
+      "ear_y_mm": 20.6,
+      "shank_overlap_mm3": 0.0,
+      "nut_overlap_mm3": 0.0
+    },
+    {
+      "offset_mm": 1.5,
+      "ear_y_mm": -20.9,
+      "shank_overlap_mm3": 0.0,
+      "nut_overlap_mm3": 0.0
+    },
+    {
+      "offset_mm": 1.5,
+      "ear_y_mm": 20.6,
+      "shank_overlap_mm3": 0.0,
+      "nut_overlap_mm3": 0.0
+    },
+    {
+      "offset_mm": 2.125,
+      "ear_y_mm": -20.9,
+      "shank_overlap_mm3": 0.0,
+      "nut_overlap_mm3": 0.0
+    },
+    {
+      "offset_mm": 2.125,
+      "ear_y_mm": 20.6,
+      "shank_overlap_mm3": 0.0,
+      "nut_overlap_mm3": 0.0
+    },
+    {
+      "offset_mm": 2.75,
+      "ear_y_mm": -20.9,
+      "shank_overlap_mm3": 0.0,
+      "nut_overlap_mm3": 0.0
+    },
+    {
+      "offset_mm": 2.75,
+      "ear_y_mm": 20.6,
+      "shank_overlap_mm3": 0.0,
+      "nut_overlap_mm3": 0.0
+    },
+    {
+      "offset_mm": 3.375,
+      "ear_y_mm": -20.9,
+      "shank_overlap_mm3": 0.0,
+      "nut_overlap_mm3": 0.0
+    },
+    {
+      "offset_mm": 3.375,
+      "ear_y_mm": 20.6,
+      "shank_overlap_mm3": 0.0,
+      "nut_overlap_mm3": 0.0
+    },
+    {
+      "offset_mm": 4.0,
+      "ear_y_mm": -20.9,
+      "shank_overlap_mm3": 0.0,
+      "nut_overlap_mm3": 0.0
+    },
+    {
+      "offset_mm": 4.0,
+      "ear_y_mm": 20.6,
+      "shank_overlap_mm3": 0.0,
+      "nut_overlap_mm3": 0.0
+    }
+  ],
+  "fan_travel_checks": [
+    {
+      "offset_mm": -1,
+      "collisions_mm3": {
+        "H2Body": 0.0,
+        "MotorConnector": 0.0,
+        "Stock3510": 0.0,
+        "CarriageEnvelope": 0.0,
+        "RodKeepouts": 0.0,
+        "fan_bracket": 0.0
+      },
+      "rod_clearance_mm": 4.754323027239632
+    },
+    {
+      "offset_mm": 4.0,
+      "collisions_mm3": {
+        "H2Body": 0.0,
+        "MotorConnector": 0.0,
+        "Stock3510": 0.0,
+        "CarriageEnvelope": 0.0,
+        "RodKeepouts": 0.0,
+        "fan_bracket": 0.0
+      },
+      "rod_clearance_mm": 2.270927837814704
+    }
+  ],
+  "fan_adjustment_note": "Raise the duct with 4/2/0 mm spacers and the fan by 0/2/4 mm; see adjustable_mount_checks.json.",
+  "assembly_bounds_mm": [
+    -11.899999999999999,
+    84.05000000000001,
+    -27.85,
+    26.6,
+    1.0,
+    117.7
+  ],
+  "added_mount_side_mm": 10.350000000000001,
+  "added_right_mm": 22.150000000000013
+}

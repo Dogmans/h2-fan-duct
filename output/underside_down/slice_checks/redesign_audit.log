@@ -1,0 +1,303 @@
+{
+  "method": "0.2 mm samples within 0.48 mm of preceding-layer paths, or already printed paths on the same layer; bridge spans use preceding layer only",
+  "note": "A nearby anchor does not prove support along an entire path or predict physical printing.",
+  "parts": [
+    {
+      "part": "duct",
+      "physical_print_tested": false,
+      "layers": 55,
+      "runs_checked": 2901,
+      "unanchored_runs": [],
+      "runs_touching_only_earlier_same_layer_extrusions": [],
+      "bridge_paths": 560,
+      "max_bridge_unsupported_run_mm": 12.456972972972977,
+      "bridge_paths_with_both_ends_anchored": 525,
+      "longest_bridge_paths": [
+        {
+          "z_mm": 7.6,
+          "start_xy": [
+            120.912,
+            93.795
+          ],
+          "end_xy": [
+            120.912,
+            79.163
+          ],
+          "max_unsupported_run_mm": 12.456972972972977,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 7.6,
+          "start_xy": [
+            120.455,
+            79.348
+          ],
+          "end_xy": [
+            120.455,
+            93.795
+          ],
+          "max_unsupported_run_mm": 12.270054794520556,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 7.6,
+          "start_xy": [
+            119.999,
+            93.795
+          ],
+          "end_xy": [
+            119.999,
+            79.532
+          ],
+          "max_unsupported_run_mm": 12.083930555555552,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 7.6,
+          "start_xy": [
+            119.542,
+            79.717
+          ],
+          "end_xy": [
+            119.542,
+            93.795
+          ],
+          "max_unsupported_run_mm": 11.896901408450722,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 7.6,
+          "start_xy": [
+            119.085,
+            93.795
+          ],
+          "end_xy": [
+            119.085,
+            79.901
+          ],
+          "max_unsupported_run_mm": 11.710657142857166,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 7.6,
+          "start_xy": [
+            118.628,
+            80.086
+          ],
+          "end_xy": [
+            118.628,
+            93.795
+          ],
+          "max_unsupported_run_mm": 11.523507246376802,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 7.6,
+          "start_xy": [
+            118.171,
+            93.795
+          ],
+          "end_xy": [
+            118.171,
+            80.27
+          ],
+          "max_unsupported_run_mm": 11.33713235294119,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 7.6,
+          "start_xy": [
+            117.714,
+            80.455
+          ],
+          "end_xy": [
+            117.714,
+            93.795
+          ],
+          "max_unsupported_run_mm": 11.149850746268648,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 7.6,
+          "start_xy": [
+            117.257,
+            93.795
+          ],
+          "end_xy": [
+            117.257,
+            80.615
+          ],
+          "max_unsupported_run_mm": 10.983333333333336,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 7.6,
+          "start_xy": [
+            116.8,
+            80.775
+          ],
+          "end_xy": [
+            116.8,
+            93.795
+          ],
+          "max_unsupported_run_mm": 10.849999999999998,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 7.6,
+          "start_xy": [
+            116.343,
+            93.895
+          ],
+          "end_xy": [
+            116.343,
+            80.935
+          ],
+          "max_unsupported_run_mm": 10.567384615384608,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 7.6,
+          "start_xy": [
+            115.886,
+            81.077
+          ],
+          "end_xy": [
+            115.886,
+            93.895
+          ],
+          "max_unsupported_run_mm": 10.4516,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 7.6,
+          "start_xy": [
+            115.429,
+            93.895
+          ],
+          "end_xy": [
+            115.429,
+            81.203
+          ],
+          "max_unsupported_run_mm": 10.312250000000002,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 7.6,
+          "start_xy": [
+            114.972,
+            81.329
+          ],
+          "end_xy": [
+            114.972,
+            93.895
+          ],
+          "max_unsupported_run_mm": 10.1724761904762,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        },
+        {
+          "z_mm": 7.6,
+          "start_xy": [
+            101.712,
+            81.755
+          ],
+          "end_xy": [
+            101.712,
+            93.895
+          ],
+          "max_unsupported_run_mm": 10.149836065573766,
+          "ends_anchored": [
+            true,
+            true
+          ]
+        }
+      ],
+      "stl_sha256": "6913b297abb916346f03e35ff93cb3b3d3527522caa95d739f588d23dd3b8a76",
+      "gcode_sha256": "e9e401e613cdfb65f72f6d03d42f7f9b96798271418e3638b66fed909b7cedd2"
+    },
+    {
+      "part": "chain_plate",
+      "physical_print_tested": false,
+      "layers": 15,
+      "runs_checked": 534,
+      "unanchored_runs": [],
+      "runs_touching_only_earlier_same_layer_extrusions": [],
+      "bridge_paths": 0,
+      "max_bridge_unsupported_run_mm": 0,
+      "bridge_paths_with_both_ends_anchored": 0,
+      "longest_bridge_paths": [],
+      "stl_sha256": "b0872a78e92f1b449efeef0bcfe7ef0535b2ccb75e52344b4b03120968df7729",
+      "gcode_sha256": "ca59dc7a66deb26cdc1f856433055de679ac32db9afac038c7343d2a3ecb56f1"
+    },
+    {
+      "part": "spacer_2mm",
+      "physical_print_tested": false,
+      "layers": 10,
+      "runs_checked": 82,
+      "unanchored_runs": [],
+      "runs_touching_only_earlier_same_layer_extrusions": [],
+      "bridge_paths": 0,
+      "max_bridge_unsupported_run_mm": 0,
+      "bridge_paths_with_both_ends_anchored": 0,
+      "longest_bridge_paths": [],
+      "stl_sha256": "c2805e44808dde8dd6173fad5d3670dfd2ac771f69f8fad9896c530483028df7",
+      "gcode_sha256": "6e77982647387ee0151395b7f0b7e78322eb969c358ff27b4a406fa8a0bb0a67"
+    },
+    {
+      "part": "spacer_4mm",
+      "physical_print_tested": false,
+      "layers": 20,
+      "runs_checked": 162,
+      "unanchored_runs": [],
+      "runs_touching_only_earlier_same_layer_extrusions": [],
+      "bridge_paths": 0,
+      "max_bridge_unsupported_run_mm": 0,
+      "bridge_paths_with_both_ends_anchored": 0,
+      "longest_bridge_paths": [],
+      "stl_sha256": "0d6f73016de7273920959ae92a6af2b0af8b89cf38c40c599b155c88b073bc0e",
+      "gcode_sha256": "ffb09878098967c6bb868a4902c84f002798a968aa99fde54b57b381b62fb62d"
+    }
+  ]
+}

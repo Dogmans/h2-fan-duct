@@ -7,7 +7,7 @@
     "rod_diameter_mm": 8.0,
     "wall_mm": 1.6,
     "channel_width_mm": 7.0,
-    "channel_height_mm": 8.0,
+    "channel_height_mm": 6.0,
     "blend_radius_mm": 8.0,
     "inlet_corner_radius_mm": 1.2,
     "bottom_mount_x_mm": 37.4,
@@ -16,19 +16,23 @@
       7.5
     ],
     "bottom_mount_z_mm": 22.2,
-    "assembly_raise_mm": 4.0
+    "assembly_raise_mm": 4.0,
+    "duct_base_z_mm": 5.0,
+    "jet_center_z_mm": 8.5,
+    "jet_target_z_mm": 0.0,
+    "jet_land_mm": 3.0
   },
   "input_sha256": {
-    "build_underside_down_duct.py": "1bb89009d40bed700183efc2eff40160c4c9bad7c837e8d8d139dd1e08cc6d51",
+    "build_underside_down_duct.py": "06cba43fbbdefcd36ba3b5086b8677072b550b3d78f5225ea10df5871db012d1",
     "h2_hardware_reference.py": "6e0a72ec5dc1f8a2fb683448f84325de765264998e20e3ad9213ed979733c3d5",
-    "underside_down_parameters.json": "6806eff0a27e045b1d0a34794e0a970a3a7e89aee6563a9975993e4cfc3033b8"
+    "underside_down_parameters.json": "7032bbcb1a21fa5a5c4369aa370517536b9889eb1a43120e1c8d805025a8cd0a"
   },
   "physical_print_tested": false,
   "elbow_blending": [
     {
       "inlet_corner_radius_mm": 1.2,
       "rounded_edges": 6,
-      "cut_to_air_clearance_mm": 1.3410443691392118,
+      "cut_to_air_clearance_mm": 1.341044369139213,
       "blend_outer_radius_mm": 8.0,
       "blend_sidewall_mm": 1.5999935839816872
     }
@@ -39,13 +43,13 @@
     "duct": {
       "valid": true,
       "solids": 1,
-      "volume_mm3": 15613.570310156729,
+      "volume_mm3": 13650.583903908524,
       "bounds_mm": [
         -11.899999999999999,
         82.80000000000001,
         -27.85,
         23.700000000000003,
-        1.0,
+        5.0,
         16.0
       ]
     },
@@ -153,7 +157,7 @@
   "air_solids": 1,
   "air_openings": [
     {
-      "volume": 187.20000000000044,
+      "volume": 187.20000000000036,
       "bounds": [
         65.60000000000001,
         81.20000000000002,
@@ -164,29 +168,29 @@
       ]
     },
     {
-      "volume": 20.4386513319368,
+      "volume": 22.630861271423445,
       "bounds": [
         0.0,
         0.6,
-        -3.7000000000000006,
+        -3.7,
         6.300000000000001,
-        2.393558111343867,
-        5.800000000000002
+        6.628189788096091,
+        10.400000000000004
       ]
     },
     {
-      "volume": 20.438651331936832,
+      "volume": 22.630861271423484,
       "bounds": [
         27.4,
         28.0,
         -3.7,
         6.300000000000001,
-        2.393558111343867,
-        5.800000000000002
+        6.628189788096091,
+        10.400000000000006
       ]
     }
   ],
-  "heater_clearance_mm": 2.200000000000001,
+  "heater_clearance_mm": 2.0,
   "blower_rod_clearance_mm": 4.211618730964692,
   "bracket_rod_clearance_mm": 3.711618730964693,
   "intake_clearance_mm": null,
@@ -198,16 +202,22 @@
     -1,
     4.0
   ],
-  "vertical_leg_air_height_mm": 7.6,
+  "vertical_leg_air_height_mm": 5.6,
   "roof_stagger_mm": 0.4,
   "nozzle_outlet_x_mm": [
     0.0,
     28.0
   ],
   "nozzle_outlet_y_mm": 1.3,
-  "nozzle_outlet_center_z_mm": 4.096779055671934,
-  "nozzle_angle_deg": 15,
-  "jet_area_mm2_each": 32.903701960058704,
+  "nozzle_outlet_center_z_mm": 8.514094894048046,
+  "nozzle_angle_deg": 31.26373169437743,
+  "nominal_jet_axis_z_at_nozzle_mm": 0.0,
+  "jet_straight_land_mm": 3.0,
+  "manifold_cross_section_mm2": 42.0,
+  "connector_local_low_roof_z_mm": 12.0,
+  "connector_low_roof_air_height_mm": 3.8000000000000007,
+  "minimum_duct_above_nozzle_mm": 5.0,
+  "jet_area_mm2_each": 32.24096278921285,
   "mount_pattern_note": "Underside M3 at X=37.4, Y=+/-7.5 follows supplied carriage SCAD; verify actual hole depths and wiring before fitting.",
   "part_collisions_mm3": {
     "duct_fan_bracket": 0.0,
@@ -366,7 +376,7 @@
     84.05000000000001,
     -27.85,
     26.6,
-    1.0,
+    5.0,
     117.7
   ],
   "added_mount_side_mm": 10.350000000000001,

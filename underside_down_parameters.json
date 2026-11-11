@@ -5,7 +5,7 @@
   "rod_diameter_mm": 8.0,
   "wall_mm": 1.6,
   "channel_width_mm": 7.0,
-  "channel_height_mm": 8.0,
+  "channel_height_mm": 6.0,
   "blend_radius_mm": 8.0,
   "inlet_corner_radius_mm": 1.2,
   "bottom_mount_x_mm": 37.4,
@@ -14,5 +14,9 @@
     7.5
   ],
   "bottom_mount_z_mm": 22.2,
-  "assembly_raise_mm": 4.0
+  "assembly_raise_mm": 4.0,
+  "duct_base_z_mm": 5.0,
+  "jet_center_z_mm": 8.5,
+  "jet_target_z_mm": 0.0,
+  "jet_land_mm": 3.0
 }

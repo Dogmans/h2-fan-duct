@@ -45,7 +45,7 @@ def verify_and_add_spacers(doc, parameters):
         return value
 
     report = {'design': 'underside/downward with accessible rear nuts and coupled height adjustment',
-              'assembly_raise_mm': [0, 2, 4], 'lowest_duct_above_nozzle_mm': [1, 3, 5],
+              'assembly_raise_mm': [0, 2, 4], 'lowest_duct_above_nozzle_mm': [parameters['duct_base_z_mm']+d for d in [0,2,4]],
               'spacer_thickness_mm': [4, 2, 0], 'duct_screw_lengths_mm': [12, 10, 8],
               'duct_washer_stack_mm': 2, 'fan_slot_travel_mm': [-1, 4],
               'fan_slot_width_mm': 3.3, 'fan_slot_length_mm': 8.3,
@@ -120,7 +120,7 @@ def verify_and_add_spacers(doc, parameters):
                       'M3x12/x10/x8 respectively, retaining 2 mm washers. Raise '
                       'the fan by the same amount and reseal the butt joint. '
                       'The -1 mm fan slot reserve only corrects real fan fit. '
-                      'Raised jets aim higher; check cooling on the printer.')
+                      'Nominal down-angled jets target the nozzle plane; extra lift raises the target. Check cooling on the printer.')
     spacer_shapes = {'spacer_2mm': spacer(-7, 2, 14.2),
                      'spacer_4mm': spacer(-7, 4, 14.2)}
     for i, (_, y) in enumerate(mounts, 1):

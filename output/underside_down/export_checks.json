@@ -9,11 +9,11 @@
     "print_bounds_mm": [
       94.70000000000002,
       51.550000000000004,
-      15.0
+      11.0
     ],
     "screw_hole_breakout_membrane_mm": 0.2,
     "mesh_linear_deflection_mm": 0.02,
-    "stl_sha256": "84eaff67ce5194560ab6bbef8c06d6fa41cc2d746fab212067b8d4e42adbf6dd",
+    "stl_sha256": "6913b297abb916346f03e35ff93cb3b3d3527522caa95d739f588d23dd3b8a76",
     "supports": false
   },
   "fan_bracket": {

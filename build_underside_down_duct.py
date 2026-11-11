@@ -42,10 +42,12 @@ hardware = doc.addObject('App::DocumentObjectGroup', 'Hardware')
 
 WALL = P['wall_mm']
 CW = P['channel_width_mm']
-BASE = 1.0
+BASE = P['duct_base_z_mm']
 FLOOR = BASE + WALL
 ROOF = FLOOR + P['channel_height_mm']
 TOP = ROOF + WALL
+# Keep the existing bolt seats and spacer schedule independent of the ring roof.
+MOUNT_SEAT_Z = 12.2
 YC = 1.3
 MOTOR_GAP = P['motor_clearance_mm']
 FX = 61.9 + MOTOR_GAP
@@ -164,7 +166,7 @@ ears = [transform_point((73.4, y, z)) for y, z in [(-25.2, 75.4), (16.3, 36.4)]]
 rotor = transform_point((73.4, -3, 53.8))
 outlet = transform_point((73.4, -20.55, 28))
 
-# Main O manifold plus two feed channels. The existing X-directed jets remain.
+# Shallower elevated O manifold, retaining the bracket and blower datum.
 airplan = union([ring_plan(CW/2), feeds(CW/2)] + (([])))
 outerplan = union([ring_plan(CW/2+WALL), feeds(CW/2+WALL)] + (([])))
 air = extrude_plan(airplan, FLOOR, ROOF-FLOOR)
@@ -180,14 +182,17 @@ for xa,xb in [(-11,.25),(27.75,38.35),(46.95,57.55)]:
     for ya,yb in [(-30,-8.95),(11.55,30)]:
         air = air.cut(box(xb-xa,yb-ya,.2,xa,ya,ROOF-.2))
 
-# Retract raised-design jet lips 1.5 mm from the sock, retaining the aim line.
-TIP_X, TIP_Z, TIP_W, TIP_H = ((0., 4.05, 10., 3.2))
-angle = math.radians(15)
+# Internal down-angled lands keep the lip high while aiming at the nozzle plane.
+TIP_X, TIP_Z, TIP_W, TIP_H = (0., P['jet_center_z_mm'], 10., 3.2)
+JET_LAND = P['jet_land_mm']
+angle = math.atan2(TIP_Z-P['jet_target_z_mm'], 14-TIP_X)
 co, ta = math.cos(angle), math.tan(angle)
 tip_bottom = (TIP_X, TIP_Z-TIP_H/2/co)
 tip_top = (TIP_X, TIP_Z+TIP_H/2/co)
-corner_bottom = (-2, TIP_Z+(TIP_X+2)*ta-TIP_H/2/co)
-corner_top = (-2, TIP_Z+(TIP_X+2)*ta+TIP_H/2/co)
+corner_bottom = (TIP_X-JET_LAND, TIP_Z+JET_LAND*ta-TIP_H/2/co)
+corner_top = (TIP_X-JET_LAND, TIP_Z+JET_LAND*ta+TIP_H/2/co)
+assert corner_top[1] <= ROOF, 'Jet land must fit below manifold roof'
+assert tip_bottom[1]-BASE >= WALL, 'Jet lip floor too thin'
 roof = [(-4.9, ROOF), (-3.3, ROOF), corner_top, tip_top]
 lines = []
 for a, b in zip(roof, roof[1:]):
@@ -205,7 +210,7 @@ left_outer = xz_solid([(-4.9, BASE), (TIP_X, BASE)]+outside_roof[::-1],
                       YC-TIP_W/2-WALL, TIP_W+2*WALL)
 level = round(corner_top[1]/.2)*.2
 end_level = round(tip_top[1]/.2)*.2
-steps = [(-2, level)]
+steps = [(TIP_X-JET_LAND, level)]
 while level > end_level+.01:
     x = TIP_X+(tip_top[1]-(level-.1))/ta
     steps.extend([(x, level), (x, level-.2)])
@@ -311,19 +316,26 @@ adapter_air=union([elbow_air,port_air,blend_air])
 air=union([air,adapter_air])
 # A short rounded guide vane supports the broad blend roof. It follows
 # the X flow direction and leaves the two sides connected around both ends.
-guide_vane = extrude_plan(stroke([(57.5,-12),(61.5,-12)],.6),FLOOR,ROOF-FLOOR)
+guide_vane = extrude_plan(stroke([(57.5,-12),(61.5,-12),(63,-16)],.6),FLOOR,ROOF-FLOOR)
 air = air.cut(guide_vane).removeSplitter()
 outer=union([outer,elbow_outer,port_outer,blend_outer])
+
+# Local low roof clears the fixed motor connector through the retained 4 mm lift.
+# The air relief is larger than the external notch by one wall thickness.
+# The lowered portion retains 3.8 mm air height; the adjacent strip stays taller.
+connector_roof = 12.0
+outer = outer.cut(box(10,15,20,53.4,-7.5,connector_roof)).removeSplitter()
+air = air.cut(box(10+2*WALL,15+2*WALL,20,53.4-WALL,-7.5-WALL,connector_roof-WALL)).removeSplitter()
 
 # Two accessible vertical duct bolts into captive nuts in the underside bracket.
 duct_mounts = [(44.4, -7.0), (44.4, 9.6)]
 for x, y in duct_mounts:
-    outer = outer.fuse(box(12.2, 11, TOP-BASE, 38.3, y-5.5, BASE))
-    outer = outer.fuse(box(9, 11, DUCT_MOUNT_TOP-TOP, x-3.5, y-5.5, TOP))
+    outer = outer.fuse(box(12.2, 11, MOUNT_SEAT_Z-BASE, 38.3, y-5.5, BASE))
+    outer = outer.fuse(box(9, 11, DUCT_MOUNT_TOP-MOUNT_SEAT_Z, x-3.5, y-5.5, MOUNT_SEAT_Z))
 duct = outer.cut(air)
 for x, y in duct_mounts:
     duct = duct.cut(cyl(1.65, 30, (x, y, 0)))
-    duct = duct.cut(cyl(3.8, TOP, (x, y, 0)))
+    duct = duct.cut(cyl(3.8, MOUNT_SEAT_Z, (x, y, 0)))
 duct = duct.removeSplitter()
 rounding=[]
 # Round the two base corners and four flared inlet corners as one connected
@@ -492,10 +504,16 @@ report = {'design':('underside O duct; outward intake 5015 with tangent downward
           'outward_intake_check_depth_mm':(10),
           'frame_relief_window_mm':37.0,
           'fan_adjustment_axis':('Z'),'fan_adjustment_mm':[-1,FAN_UP],
-          'vertical_leg_air_height_mm':7.6,'roof_stagger_mm':.4,
+          'vertical_leg_air_height_mm':P['channel_height_mm']-.4,'roof_stagger_mm':.4,
           'nozzle_outlet_x_mm':[TIP_X,28-TIP_X], 'nozzle_outlet_y_mm':YC,
           'nozzle_outlet_center_z_mm':(tip_bottom[1]+end_level)/2,
-          'nozzle_angle_deg':15, 'jet_area_mm2_each':TIP_W*(end_level-tip_bottom[1])*co,
+          'nozzle_angle_deg':math.degrees(angle),
+          'nominal_jet_axis_z_at_nozzle_mm':TIP_Z-(14-TIP_X)*ta,
+          'jet_straight_land_mm':JET_LAND,
+          'manifold_cross_section_mm2':CW*P['channel_height_mm'],
+          'connector_local_low_roof_z_mm':connector_roof,
+          'connector_low_roof_air_height_mm':connector_roof-WALL-FLOOR,
+          'minimum_duct_above_nozzle_mm':BASE, 'jet_area_mm2_each':TIP_W*(end_level-tip_bottom[1])*co,
           'mount_pattern_note':'Underside M3 at X=37.4, Y=+/-7.5 follows supplied carriage SCAD; verify actual hole depths and wiring before fitting.'}
 manufacturing = [('duct', duct), ('fan_bracket', bracket), ('chain_plate', chain)]
 for name, shape in manufacturing:
@@ -509,8 +527,8 @@ for name, shape in bolts:
     report['hardware_collisions_mm3'][name]['references'] = shape.common(
         Part.makeCompound([doc.getObject(n).Shape for n in reference_names])).Volume
 report['air_blockage_mm3'] = union([duct, bracket]).common(air).Volume
-report['fixing_bore_air_clearance_mm'] = [cyl(3.8,TOP,(x,y,0)).distToShape(air)[0] for x,y in duct_mounts]
-report['fixing_bore_air_overlap_mm3'] = [cyl(3.8,TOP,(x,y,0)).common(air).Volume for x,y in duct_mounts]
+report['fixing_bore_air_clearance_mm'] = [cyl(3.8,MOUNT_SEAT_Z,(x,y,0)).distToShape(air)[0] for x,y in duct_mounts]
+report['fixing_bore_air_overlap_mm3'] = [cyl(3.8,MOUNT_SEAT_Z,(x,y,0)).common(air).Volume for x,y in duct_mounts]
 report['intake_blockage_mm3'] = union([duct, bracket, chain]).common(doc.IntakeKeepout.Shape).Volume
 report['slot_checks'] = []
 for i in range(9):
@@ -547,7 +565,7 @@ assert max(report['part_collisions_mm3'].values()) < 1e-5, 'Printed parts overla
 assert all(v < 1e-5 for row in report['hardware_collisions_mm3'].values() for v in row.values()), 'Hardware collision'
 assert all(max(r['shank_overlap_mm3'],r['nut_overlap_mm3'])<1e-5 for r in report['slot_checks']), 'Slot/nut travel'
 assert all(max(r['collisions_mm3'].values())<1e-5 and r['rod_clearance_mm']>=2 for r in report['fan_travel_checks']), 'Fan travel clearance'
-assert report['heater_clearance_mm'] >= 2 and duct.BoundBox.ZMin >= .99
+assert report['heater_clearance_mm'] >= 2 and duct.BoundBox.ZMin >= BASE-1e-5
 assert report['blower_rod_clearance_mm'] >= 2 and report['bracket_rod_clearance_mm'] >= 2
 assert all(hashlib.sha256(open(os.path.join(ROOT,n),'rb').read()).hexdigest()==h for n,h in input_hashes.items()), 'Build input changed'
 
@@ -564,7 +582,7 @@ for name, shape in manufacturing:
     # counterbore ceiling a continuous short bridge. Pierce these films before
     # assembly; fit/hardware checks above use the prepared, open screw holes.
     if name == 'duct':
-        shape = union([shape]+[cyl(1.65,.2,(x,y,TOP)) for x,y in duct_mounts])
+        shape = union([shape]+[cyl(1.65,.2,(x,y,MOUNT_SEAT_Z)) for x,y in duct_mounts])
     if name != 'spacer_2mm':
         export_shapes.append(shape)
     if name == 'spacer_4mm':

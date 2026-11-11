@@ -1,0 +1,87 @@
+{
+  "duct": {
+    "stl_watertight": true,
+    "nonmanifold_edges": 0,
+    "step_valid": true,
+    "step_solids": 1,
+    "bed_area_mm2": 2665.8219984834172,
+    "steep_nonbridge_area_mm2": 0,
+    "print_bounds_mm": [
+      94.70000000000002,
+      51.550000000000004,
+      15.0
+    ],
+    "screw_hole_breakout_membrane_mm": 0.2,
+    "mesh_linear_deflection_mm": 0.02,
+    "stl_sha256": "84eaff67ce5194560ab6bbef8c06d6fa41cc2d746fab212067b8d4e42adbf6dd",
+    "supports": false
+  },
+  "fan_bracket": {
+    "stl_watertight": true,
+    "nonmanifold_edges": 0,
+    "step_valid": true,
+    "step_solids": 1,
+    "bed_area_mm2": 1089.4200191936998,
+    "steep_nonbridge_area_mm2": 62.157149612903595,
+    "print_bounds_mm": [
+      56.59748035646676,
+      53.5,
+      34.500000000000014
+    ],
+    "screw_hole_breakout_membrane_mm": 0,
+    "mesh_linear_deflection_mm": 0.04,
+    "stl_sha256": "d6fbac8356509ec2e7dc38a8485e854497a9bca62bdfb7ad44435efa439f0112",
+    "supports": true
+  },
+  "chain_plate": {
+    "stl_watertight": true,
+    "nonmanifold_edges": 0,
+    "step_valid": true,
+    "step_solids": 1,
+    "bed_area_mm2": 1054.2383746960334,
+    "steep_nonbridge_area_mm2": 0,
+    "print_bounds_mm": [
+      17.0,
+      91.0,
+      3.000000000000014
+    ],
+    "screw_hole_breakout_membrane_mm": 0,
+    "mesh_linear_deflection_mm": 0.04,
+    "stl_sha256": "b0872a78e92f1b449efeef0bcfe7ef0535b2ccb75e52344b4b03120968df7729",
+    "supports": false
+  },
+  "spacer_2mm": {
+    "stl_watertight": true,
+    "nonmanifold_edges": 0,
+    "step_valid": true,
+    "step_solids": 1,
+    "bed_area_mm2": 90.4470140006018,
+    "steep_nonbridge_area_mm2": 0,
+    "print_bounds_mm": [
+      9.0,
+      11.0,
+      2.0
+    ],
+    "screw_hole_breakout_membrane_mm": 0,
+    "mesh_linear_deflection_mm": 0.04,
+    "stl_sha256": "c2805e44808dde8dd6173fad5d3670dfd2ac771f69f8fad9896c530483028df7",
+    "supports": false
+  },
+  "spacer_4mm": {
+    "stl_watertight": true,
+    "nonmanifold_edges": 0,
+    "step_valid": true,
+    "step_solids": 1,
+    "bed_area_mm2": 90.4470140006018,
+    "steep_nonbridge_area_mm2": 0,
+    "print_bounds_mm": [
+      9.0,
+      11.0,
+      4.0
+    ],
+    "screw_hole_breakout_membrane_mm": 0,
+    "mesh_linear_deflection_mm": 0.04,
+    "stl_sha256": "0d6f73016de7273920959ae92a6af2b0af8b89cf38c40c599b155c88b073bc0e",
+    "supports": false
+  }
+}

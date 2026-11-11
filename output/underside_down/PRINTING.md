@@ -1,22 +1,26 @@
-# Adjustable underside O duct and outward-facing 5015
+# Elevated slim underside O duct and outward-facing 5015
 
 ![Nominal assembly](assembled.png)
 
-Open `H2_5015_Underside_Down.FCStd`. The saved assembly uses two 4 mm spacers, giving the duct 1 mm clearance above the nozzle tip. The complete duct and blower can rise together by 2 or 4 mm. The H2 bracket and chain plate stay fixed.
+Open `H2_5015_Underside_Down.FCStd`. The saved assembly uses two 4 mm spacers, giving the duct 5 mm clearance above the nozzle tip. The complete duct and blower can rise together by 2 or 4 mm. The H2 bracket and chain plate stay fixed.
 
 ## Choose the height
 
 | Assembly lift | Spacer at each duct mount | Duct screws | Duct clearance above nozzle |
 | --- | --- | --- | --- |
-| 0 mm | 4 mm | 2 x M3x12 | 1 mm |
-| +2 mm | 2 mm | 2 x M3x10 | 3 mm |
-| +4 mm | None | 2 x M3x8 | 5 mm |
+| 0 mm (recommended) | 4 mm | 2 x M3x12 | 5 mm |
+| +2 mm | 2 mm | 2 x M3x10 | 7 mm |
+| +4 mm | None | 2 x M3x8 | 9 mm |
 
 Use **2 mm total washers under each duct screw head** at every setting. Print two identical spacers of the selected thickness. Do not mix thicknesses, stack spacers beyond 4 mm, or keep the long screws when raising the duct: the matched lengths keep their tips at Z=22.2 mm and clear the H2 body.
 
-The fan slots provide -1 to +4 mm vertical travel. Raise the fan by exactly the same amount as the duct, close the inlet seam gently and retighten both fan screws. The -1 mm reserve only accommodates real housing variation at the seam. Do not force the fan into the duct or lower the nominal duct below its 1 mm setting.
+The fan slots provide -1 to +4 mm vertical travel. Raise the fan by exactly the same amount as the duct, close the inlet seam gently and retighten both fan screws. The -1 mm reserve only accommodates real housing variation at the seam. Do not force the fan into the duct or lower the nominal duct below its 5 mm setting.
 
-Raised jets also aim 2 or 4 mm higher. Use the lowest setting that provides clearance and test cooling at the selected height.
+Use the saved 0 mm lift setting for the intended aim. The internal outlet lands angle down by 31.3 degrees and geometrically target the nozzle-tip plane. Extra lift raises that target by 2 or 4 mm and can direct part of the jet onto the heater sock; test cooling if using it. Nozzle-tip clearance equals bed clearance only when the nozzle tip is at the bed datum; add the current layer height in normal use.
+
+![Outlet section: green 5 mm clearance and cyan geometric aim lines](jet_clearance_section.png)
+
+Cyan lines show geometric axes, not CFD results.
 
 ![Assembly at +4 mm, without spacers](raised_4mm.png)
 
@@ -28,9 +32,9 @@ The fan nut channels pass through the rear support arm, retaining the 1.5 mm flo
 
 The fan center is Y=1.3, Z=41.8 mm at nominal height, with its outlet at Z=16 mm. Its back remains 4 mm from the H2 motor end. The modeled fan has at least 2.27 mm rod clearance at maximum lift. The fixed bracket has relief around the rising elbow.
 
-The O manifold retains nominal 7 x 8 mm air passages, 1.6 mm walls, staggered roofs and the tangent elbow. Its 8 mm return blend and six 1.2 mm inlet corner rounds remain. A 1.2 mm thick, 5.2 mm long rounded internal guide vane in the broad elbow blend anchors its printed roof. Air remains connected around both vane ends.
+The O manifold has nominal 7 x 6 mm air passages, 1.6 mm walls, staggered roofs and the tangent elbow. The ring is 9.2 mm deep rather than 11.2 mm, and the whole duct is 11 mm tall rather than 15 mm. Modeled material volume falls 12.6%; the X/Y footprint is retained. Its 8 mm return blend and six 1.2 mm inlet corner rounds remain. A rounded 1.2 mm internal vane turns toward the elbow to anchor its roof. Air remains connected around the vane ends. A local roof recess clears the motor connector through all 4 mm of lift, retaining 0.2 mm vertical connector clearance at maximum lift. The lowered portion has 3.8 mm air height; an adjacent strip remains taller. The reduced passages may increase pressure loss; airflow rate and balance are untested.
 
-The opposed mouths are now X=0 and 28, Y=1.3, centered near Z=4.10 mm at nominal height. They aim inward and down at 15 degrees and maintain **at least 2 mm clearance to the modeled heater sock throughout adjustment**. The nominal heater gap is 2.2 mm. Actual socks, wiring and fan housings vary.
+The opposed mouths are now X=0 and 28, Y=1.3, centered near Z=8.51 mm at nominal height. Their 3 mm internal lands aim inward and down at 31.3 degrees and maintain **at least 2 mm clearance to the modeled heater sock throughout adjustment**. The nominal heater gap is 2.0 mm. Each outlet has about 32.2 mm² projected flow area, versus 32.9 mm² previously. Actual socks, wiring and fan housings vary.
 
 Mount-side projection is 10.35 mm, rightward extension including hardware is 22.15 mm, and the rearmost printed point is Y=26.6 mm. At nominal height the blower/bracket rod gaps are 4.21/3.71 mm. The intake has an unobstructed modeled 32.5 mm diameter, 10 mm deep check zone at all heights; this is not a manufacturer clearance specification.
 
@@ -74,8 +78,8 @@ To change height later, support the duct, loosen both fan screws, remove the two
 
 `export_checks.json` records all five STL files as watertight with zero nonmanifold edges, and all STEP files reopening as valid single solids. The duct has no non-flat downward facets beyond the 45-degree limit; the bracket needs external supports.
 
-SuperSlicer 2.7.62.0 completes all five parts. The duct retains bridge/loose-extrusion alerts; the bracket, chain plate and spacers have no slicer warnings. Inspect these alerts and the generated paths before printing. The path audit checks 3,420 duct runs, 534 chain-plate runs and 244 spacer runs, with no unanchored runs or runs relying only on earlier same-layer paths. The longest measured bridge is **14.57 mm**. `slice_checks/toolpath_anchor_audit.json` records checked STL/G-code hashes, extrusion anchors and bridge spans. Verification G-code omits heating/homing and is **not printer-ready**.
+SuperSlicer 2.7.62.0 completes all five parts. The duct retains bridge/loose-extrusion alerts; the bracket, chain plate and spacers have no slicer warnings. Inspect these alerts and the generated paths before printing. The updated path audit checks 2,901 duct runs, 534 chain-plate runs and 244 spacer runs, with no unanchored runs or runs relying only on earlier same-layer paths. The longest measured bridge is **12.46 mm**. `slice_checks/toolpath_anchor_audit.json` records checked STL/G-code hashes, extrusion anchors and bridge spans. Verification G-code omits heating/homing and is **not printer-ready**.
 
-Regenerate in FreeCAD with `build_underside_down_duct.py` and `render_underside_down_duct.py`. The builder invokes `verify_underside_down_adjustment.py` before exporting; that verifier can also check the saved assembly independently. Slice with `verify_underside_down.ps1`, then run `python audit_underside_down_toolpaths.py`. `-FailOnWarnings` rejects retained slicer alerts.
+Regenerate in FreeCAD with `build_underside_down_duct.py`, `render_underside_down_duct.py` and `render_clearance_review.py`. The builder invokes `verify_underside_down_adjustment.py` before exporting; that verifier can also check the saved assembly independently. Slice with `verify_underside_down.ps1`, then run `python audit_underside_down_toolpaths.py`. `-FailOnWarnings` rejects retained slicer alerts.
 
 This remains a prototype reviewed in CAD and toolpaths. Physical fit, PETG sag, thermal creep, mount stiffness and airflow balance require testing.
